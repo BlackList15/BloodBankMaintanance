@@ -99,7 +99,6 @@
                       <Component id="jTextField8" min="-2" pref="166" max="-2" attributes="0"/>
                       <Component id="jTextField6" min="-2" pref="166" max="-2" attributes="0"/>
                       <Component id="jTextField5" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
-                      <Component id="jDateChooser1" min="-2" pref="166" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
               </Group>
@@ -137,10 +136,7 @@
                               <Component id="jLabel10" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel9" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel9" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane2" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
@@ -274,8 +270,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Transction Date"/>
           </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
