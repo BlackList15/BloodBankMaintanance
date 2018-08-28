@@ -3,14 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com;
+//package com;
 
 /**
  *
  * @author Ashik
  */
+//import MainMenu;
+import java.sql.*;
+import javax.swing.*;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
 
+    Connection conn=null;
+    PreparedStatement pst=null;
+    ResultSet rs=null;
     /**
      * Creates new form Login
      */
@@ -39,11 +48,11 @@ public class Login extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtadminid = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtpwd = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,7 +72,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Just donate Blood");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ashik\\Desktop\\Blood Bank\\doctor-clinic-illustration_1270-69.jpg")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ashik\\Desktop\\Blood Bank\\BloodBank\\Images\\doctor-clinic-illustration_1270-69.jpg")); // NOI18N
         jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -128,13 +137,13 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 0, 102));
         jLabel6.setText("Password");
 
-        jTextField1.setBackground(new java.awt.Color(51, 51, 255));
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtadminid.setBackground(new java.awt.Color(51, 51, 255));
+        txtadminid.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtadminid.setForeground(new java.awt.Color(255, 255, 255));
+        txtadminid.setBorder(null);
+        txtadminid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtadminidActionPerformed(evt);
             }
         });
 
@@ -142,12 +151,17 @@ public class Login extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jPasswordField1.setBackground(new java.awt.Color(51, 51, 255));
-        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setBorder(null);
+        txtpwd.setBackground(new java.awt.Color(51, 51, 255));
+        txtpwd.setForeground(new java.awt.Color(255, 255, 255));
+        txtpwd.setBorder(null);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ashik\\Desktop\\Blood Bank\\images (1).png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ashik\\Desktop\\Blood Bank\\BloodBank\\Images\\images (1).png")); // NOI18N
         jLabel7.setText("jLabel7");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -163,10 +177,10 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(110, 110, 110)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
+                            .addComponent(txtadminid)
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)))
+                            .addComponent(txtpwd, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(367, 367, 367)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -184,7 +198,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtadminid, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
@@ -192,7 +206,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtpwd, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(115, 115, 115)
@@ -218,9 +232,36 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtadminidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtadminidActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtadminidActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        conn=DbConnection.ConnectDb();
+        String Sql="Select * from login where id=? and password=?";
+        try
+        {
+            pst=conn.prepareStatement(Sql);
+            pst.setString(1,txtadminid.getText());
+            pst.setString(2,txtpwd.getText());
+            rs=pst.executeQuery();
+            if(rs.next())
+            {
+                JOptionPane.showMessageDialog(null,"Welcome user");
+                MainMenu m=new MainMenu();
+                m.setVisible(true);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Invalid Username or Password","Access Denied",JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,13 +309,13 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtadminid;
+    private javax.swing.JPasswordField txtpwd;
     // End of variables declaration//GEN-END:variables
 }
