@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,12 +14,38 @@
  * @author Ashik
  */
 public class AddHospital extends javax.swing.JFrame {
+    
+    Connection conn=null;
+    PreparedStatement pst=null;
 
     /**
      * Creates new form AddReceiver
      */
     public AddHospital() {
         initComponents();
+    }
+    
+    public boolean checkInput() {
+        if(txtHospital.getText() == null
+           || txtContact.getText() == null
+           || txtAddress.getText() == null 
+           || txtDistance.getText() == null 
+           || txtDoctor.getText() == null 
+           || txtDocContact.getText() == null) {
+                return false;
+        }
+        else {
+            try{
+                Integer.parseInt(txtContact.getText());
+                Float.parseFloat(txtDistance.getText());
+                Integer.parseInt(txtDocContact.getText());
+                return true;
+                
+            }catch(Exception ex) {
+                return false;
+            }
+            
+        }
     }
 
     /**
@@ -32,17 +64,17 @@ public class AddHospital extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtDoctor = new javax.swing.JTextField();
+        txtContact = new javax.swing.JTextField();
+        txtDistance = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField6 = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtHospital = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtDocContact = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -140,18 +172,18 @@ public class AddHospital extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtDistance, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addComponent(txtContact, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtAddress)
+                    .addComponent(txtHospital, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDoctor)
+                    .addComponent(txtDocContact, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(163, Short.MAX_VALUE)
@@ -167,29 +199,29 @@ public class AddHospital extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtDocContact, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDistance, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,15 +265,44 @@ public class AddHospital extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+       txtHospital.setText("");
+        txtContact.setText("");
+        txtAddress.setText("");
+        txtDistance.setText("");
+        txtDoctor.setText("");
+        txtDocContact.setText(""); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if(checkInput()) {
+            conn = DbConnection.ConnectDb();
+            try {
+                pst = conn.prepareStatement("INSERT INTO hospital(hosName,hosContact,address,disFromHere,cheifDocName,cheifDocCon)"
+                        + "values(?,?,?,?,?,?)");
+                pst.setString(1, txtHospital.getText());
+                pst.setString(2, txtContact.getText());
+                pst.setString(3, txtAddress.getText());
+                pst.setString(4, txtDistance.getText());
+                pst.setString(5, txtDoctor.getText());
+                pst.setString(6, txtDocContact.getText());
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data Inserted");
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "One or More Field Are Empty");
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -293,11 +354,11 @@ public class AddHospital extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtContact;
+    private javax.swing.JTextField txtDistance;
+    private javax.swing.JTextField txtDocContact;
+    private javax.swing.JTextField txtDoctor;
+    private javax.swing.JTextField txtHospital;
     // End of variables declaration//GEN-END:variables
 }
