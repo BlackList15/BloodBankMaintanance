@@ -7,12 +7,12 @@
  *
  * @author Ashik
  */
-public class Donor extends javax.swing.JFrame {
+public class Receiver extends javax.swing.JFrame {
 
     /**
      * Creates new form Donor
      */
-    public Donor() {
+    public Receiver() {
         initComponents();
     }
 
@@ -90,7 +90,7 @@ public class Donor extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 48)); // NOI18N
-        jLabel4.setText("Donor");
+        jLabel4.setText("Receiver");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,9 +194,8 @@ public class Donor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        AddDonor ad = new AddDonor();
-        ad.setVisible(true);
-    // TODO add your handling code here:
+        AddReceiver ar = new AddReceiver();
+        ar.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
