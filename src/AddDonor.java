@@ -1,3 +1,10 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,12 +15,33 @@
  * @author Ashik
  */
 public class AddDonor extends javax.swing.JFrame {
-
+    
+    Connection conn=null;
+    PreparedStatement pst=null;
     /**
      * Creates new form AddReceiver
      */
     public AddDonor() {
         initComponents();
+    }
+    
+    public boolean checkInputDonor() {
+        if(txtDonor.getText() == null 
+           || txtEmail.getText() == null 
+           || txtAddress.getText() == null 
+           || txtContact.getText() == null 
+           || txtDateOfBirth.getDate()== null ) {
+                return false;
+        }
+        else {
+            try {
+                Integer.parseInt(txtContact.getText());
+                return true;
+            
+            }catch(Exception ex) {
+                return false;
+            }
+        }
     }
 
     /**
@@ -152,6 +180,11 @@ public class AddDonor extends javax.swing.JFrame {
         female.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         female.setForeground(new java.awt.Color(255, 255, 255));
         female.setText("Female");
+        female.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                femaleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -268,20 +301,72 @@ public class AddDonor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+            txtDonor.setText("");
+            txtEmail.setText("");
+            txtAddress.setText("");
+            txtContact.setText("");
+            male.setSelected(false);
+            female.setSelected(false);
+            txtDateOfBirth.setDate(null);
+            selectBlood.setSelectedItem(null);
+            
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if(checkInputDonor()) {
+            conn = DbConnection.ConnectDb();
+            
+            try {
+                pst = conn.prepareStatement("INSERT into donor(name,email,address,contact,gender,dateOfBirth,bloodGroup)"
+                        + "values(?,?,?,?,?,?,?)");
+                pst.setString(1, txtDonor.getText());
+                pst.setString(2, txtEmail.getText());
+                pst.setString(3, txtAddress.getText());
+                pst.setString(4, txtContact.getText());
+                pst.setString(5, gender);
+                
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                String addDate = dateFormat.format(txtDateOfBirth.getDate());
+                pst.setString(6, addDate);
+                
+                String value = selectBlood.getSelectedItem().toString();
+                pst.setString(7, value);
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data Inserted");
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "One or More Field Are Empty");
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleActionPerformed
         // TODO add your handling code here:
+        if(male.isSelected()) {
+            female.setSelected(false);
+            gender = "male";
+        }
     }//GEN-LAST:event_maleActionPerformed
+
+    private void femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleActionPerformed
+        // TODO add your handling code here:
+        if(female.isSelected()) {
+            male.setSelected(false);
+        gender = "female";
+        }
+    }//GEN-LAST:event_femaleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,4 +427,5 @@ public class AddDonor extends javax.swing.JFrame {
     private javax.swing.JTextField txtDonor;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
+    private String gender;
 }

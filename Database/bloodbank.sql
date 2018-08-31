@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2018 at 11:15 AM
+-- Generation Time: Aug 31, 2018 at 11:48 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -38,6 +38,13 @@ CREATE TABLE `donor` (
   `dateOfBirth` date NOT NULL,
   `bloodGroup` char(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `donor`
+--
+
+INSERT INTO `donor` (`id`, `name`, `email`, `address`, `contact`, `gender`, `dateOfBirth`, `bloodGroup`) VALUES
+(1, 'karshan', 'Karshanguna@gmail.com', 'wattala', 751425423, 'male', '2018-08-08', 'A+');
 
 -- --------------------------------------------------------
 
@@ -111,7 +118,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hospital`
