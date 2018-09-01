@@ -130,6 +130,11 @@ public class AddDonor extends javax.swing.JFrame {
 
         selectBlood.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         selectBlood.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" }));
+        selectBlood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectBloodActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 0, 102));
         jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
@@ -168,7 +173,6 @@ public class AddDonor extends javax.swing.JFrame {
         male.setBackground(new java.awt.Color(51, 0, 102));
         male.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         male.setForeground(new java.awt.Color(255, 255, 255));
-        male.setSelected(true);
         male.setText("Male");
         male.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,6 +371,10 @@ public class AddDonor extends javax.swing.JFrame {
         gender = "female";
         }
     }//GEN-LAST:event_femaleActionPerformed
+
+    private void selectBloodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBloodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectBloodActionPerformed
 
     /**
      * @param args the command line arguments
