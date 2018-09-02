@@ -28,7 +28,7 @@ public class AddReceiver extends javax.swing.JFrame {
     public boolean checkInputReceiver(){
          if(txtPatient.getText() == null 
            || selectHospital.getSelectedItem() == null 
-           || selectHospitalAddress.getSelectedItem()== null 
+           || txtHospitalAddress.getText()== null 
            || txtChiefDoctor.getText() == null 
            || selectBloodGroup.getSelectedItem()== null
            || txtDonorId.getText() == null
@@ -53,9 +53,8 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtPatient = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        selectHospital = new javax.swing.JComboBox<>();
+        selectHospital = new javax.swing.JComboBox<String>();
         jLabel4 = new javax.swing.JLabel();
-        selectHospitalAddress = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtChiefDoctor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -63,7 +62,6 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtDonorId = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtBagNo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtDonorName = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -71,6 +69,8 @@ public class AddReceiver extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        txtHospitalAddress = new javax.swing.JTextField();
+        selectBloodBag = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,13 +120,11 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Hospital");
 
-        selectHospital.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectHospital.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Hospital Address");
-
-        selectHospitalAddress.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,48 +188,54 @@ public class AddReceiver extends javax.swing.JFrame {
             }
         });
 
+        selectBloodBag.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
+                .addGap(107, 107, 107)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addGap(56, 56, 56)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(selectHospital, 0, 168, Short.MAX_VALUE)
-                    .addComponent(selectHospitalAddress, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPatient)
-                    .addComponent(txtChiefDoctor))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(selectHospital, 0, 168, Short.MAX_VALUE)
+                            .addComponent(txtPatient)
+                            .addComponent(txtChiefDoctor)
+                            .addComponent(txtHospitalAddress))
                         .addGap(76, 76, 76)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(selectBloodGroup, 0, 200, Short.MAX_VALUE)
+                                    .addComponent(selectBloodBag, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDonorName)
+                                    .addComponent(txtDonorId, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
+                        .addGap(4, 4, 4))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTransactionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtTransactionDate, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDonorName, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                                .addComponent(txtDonorId, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtBagNo)))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(51, 51, 51))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -261,22 +265,28 @@ public class AddReceiver extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(selectHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtDonorId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8)
+                    .addComponent(selectBloodBag, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(selectHospitalAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtDonorName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtChiefDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)
-                        .addComponent(txtBagNo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
-                .addGap(44, 44, 44)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtHospitalAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtChiefDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9))
+                            .addComponent(jLabel5))
+                        .addGap(44, 44, 44))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDonorId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(41, 41, 41)
+                        .addComponent(txtDonorName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(txtTransactionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -327,9 +337,7 @@ public class AddReceiver extends javax.swing.JFrame {
                 String hospital = selectHospital.getSelectedItem().toString();
                 pst.setString(2, hospital);
                 
-                String hospitalAddress = selectHospitalAddress.getSelectedItem().toString();
-                pst.setString(3, hospitalAddress);
-                
+                pst.setString(3, txtHospitalAddress.getText());
     
                 pst.setString(4, txtChiefDoctor.getText());
                 
@@ -338,7 +346,8 @@ public class AddReceiver extends javax.swing.JFrame {
                 
                 pst.setString(6, txtDonorId.getText());
                 pst.setString(7, txtDonorName.getText());
-                pst.setString(8, txtBagNo.getText());
+                String bloodbag = selectBloodBag.getSelectedItem().toString();
+                pst.setString(8, bloodbag);
                 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
                 String transactionDate = dateFormat.format(txtTransactionDate.getDate());
@@ -361,10 +370,10 @@ public class AddReceiver extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         txtPatient.setText("");
             selectHospital.setSelectedItem("");
-            selectHospitalAddress.setSelectedItem("");
+            txtHospitalAddress.setText("");
             txtChiefDoctor.setText("");
             selectBloodGroup.setSelectedItem(null);
-            txtBagNo.setText("");
+            selectBloodBag.setSelectedItem("");
             txtDonorId.setText("");
             txtDonorName.setText("");
             txtTransactionDate.setDate(null);
@@ -431,13 +440,13 @@ public class AddReceiver extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JComboBox selectBloodBag;
     private javax.swing.JComboBox selectBloodGroup;
     private javax.swing.JComboBox<String> selectHospital;
-    private javax.swing.JComboBox<String> selectHospitalAddress;
-    private javax.swing.JTextField txtBagNo;
     private javax.swing.JTextField txtChiefDoctor;
     private javax.swing.JTextField txtDonorId;
     private javax.swing.JTextField txtDonorName;
+    private javax.swing.JTextField txtHospitalAddress;
     private javax.swing.JTextField txtPatient;
     private com.toedter.calendar.JDateChooser txtTransactionDate;
     // End of variables declaration//GEN-END:variables
