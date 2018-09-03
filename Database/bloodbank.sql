@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2018 at 08:00 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.11
+-- Generation Time: Sep 03, 2018 at 05:02 PM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `bloodbank`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bloodbag`
+--
+
+CREATE TABLE `bloodbag` (
+  `Bno` varchar(6) NOT NULL,
+  `Bgroup` varchar(3) NOT NULL,
+  `DId` varchar(6) NOT NULL,
+  `Dname` varchar(25) NOT NULL,
+  `Bvolume` int(11) NOT NULL,
+  `Ddate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bloodbag`
+--
+
+INSERT INTO `bloodbag` (`Bno`, `Bgroup`, `DId`, `Dname`, `Bvolume`, `Ddate`) VALUES
+('123456', 'O+', 'SV1234', 'adharva', 200, '2018-09-04');
 
 -- --------------------------------------------------------
 
@@ -102,6 +124,12 @@ CREATE TABLE `receiver` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `bloodbag`
+--
+ALTER TABLE `bloodbag`
+  ADD PRIMARY KEY (`Bno`);
 
 --
 -- Indexes for table `donor`

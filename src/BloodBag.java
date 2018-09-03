@@ -1,3 +1,10 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,14 +16,32 @@
  * @author Ashik
  */
 public class BloodBag extends javax.swing.JFrame {
-
+     Connection conn=null;
+    PreparedStatement pst=null;
     /**
      * Creates new form AddReceiver
      */
     public BloodBag() {
         initComponents();
     }
-
+public boolean checkInput() {
+        if(txtBagNo.getText() == null 
+           || txtDonorName.getText() == null 
+           || txtBloodVolume.getText() == null 
+           || txtDonationDate.getDate()== null ) {
+                return false;
+        }
+        else {
+            try {
+                Integer.parseInt(txtBagNo.getText());
+                Float.parseFloat(txtBloodVolume.getText());
+                return true;
+            
+            }catch(Exception ex) {
+                return false;
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,7 +198,7 @@ public class BloodBag extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtBloodVolume, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDonationDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -224,15 +249,18 @@ public class BloodBag extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -244,14 +272,48 @@ public class BloodBag extends javax.swing.JFrame {
     }//GEN-LAST:event_selectBloodGroupActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    
+       if (checkInput()){
+     try {
+                pst = conn.prepareStatement("INSERT into bloodbag(Bno,Bgroup,DId,Dname,Bvolume,Ddate)"
+                        + "values(?,?,?,?,?,?,?)");
+                pst.setString(1, txtBagNo.getText());
+               
+                String bloodGroup = selectBloodGroup.getSelectedItem().toString();
+                pst.setString(2, bloodGroup);
+                
+                String donarId = selectDonorId.getSelectedItem().toString();
+                pst.setString(3, donarId);
+                
+                pst.setString(4, txtDonorName.getText());
+                
+                pst.setString(5, txtBloodVolume.getText());
+                
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                String donationDate = dateFormat.format(txtDonationDate.getDate());
+                pst.setString(6, donationDate);
+                
+                
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data Inserted");
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "One or More Field Are Empty");
+        }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-
+         txtBagNo.setText("");       
+         txtDonorName.setText(""); 
+         txtBloodVolume.setText(""); 
+         txtDonationDate.setDate(null);
+         selectBloodGroup.setSelectedItem(null);
+         selectDonorId.setSelectedItem(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
