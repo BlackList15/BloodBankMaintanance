@@ -292,7 +292,7 @@ public boolean checkInput() {
        if (checkInput()){
      try {
                 pst = conn.prepareStatement("INSERT into bloodbag(Bno,Bgroup,DId,Dname,Bvolume,Ddate)"
-                        + "values(?,?,?,?,?,?,?)");
+                        + "values(?,?,?,?,?,?)");
                 pst.setString(1, txtBagNo.getText());
                
                 String bloodGroup = selectBloodGroup.getSelectedItem().toString();

@@ -177,6 +177,11 @@ public class AddReceiver extends javax.swing.JFrame {
 
         selectBloodGroup.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         selectBloodGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" }));
+        selectBloodGroup.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectBloodGroupItemStateChanged(evt);
+            }
+        });
         selectBloodGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectBloodGroupActionPerformed(evt);
@@ -458,6 +463,26 @@ public class AddReceiver extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_selectHospitalItemStateChanged
+
+    private void selectBloodGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectBloodGroupItemStateChanged
+        selectBloodBag.removeAllItems();
+        conn = DbConnection.ConnectDb();
+        try {
+            String blood = selectBloodGroup.getSelectedItem().toString();
+            String selectQuery = "SELECT * FROM bloodbag WHERE Bgroup='"+blood+"'";
+            PreparedStatement pst = conn.prepareStatement(selectQuery);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()) {
+            selectBloodBag.addItem(rs.getString("Bno"));
+            }
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_selectBloodGroupItemStateChanged
 
     /**
      * @param args the command line arguments

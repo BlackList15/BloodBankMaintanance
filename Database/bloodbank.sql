@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2018 at 03:59 AM
+-- Generation Time: Sep 04, 2018 at 04:39 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -36,6 +36,13 @@ CREATE TABLE `bloodbag` (
   `Bvolume` int(11) NOT NULL,
   `Ddate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bloodbag`
+--
+
+INSERT INTO `bloodbag` (`Bno`, `Bgroup`, `DId`, `Dname`, `Bvolume`, `Ddate`) VALUES
+(1, 'O-', 2, 'Vijay', 300, '2018-07-04');
 
 -- --------------------------------------------------------
 
