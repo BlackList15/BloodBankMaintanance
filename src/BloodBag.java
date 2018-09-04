@@ -1,6 +1,7 @@
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
@@ -18,11 +19,13 @@ import javax.swing.JOptionPane;
 public class BloodBag extends javax.swing.JFrame {
      Connection conn=null;
     PreparedStatement pst=null;
+    ResultSet rs = null;
     /**
      * Creates new form AddReceiver
      */
     public BloodBag() {
         initComponents();
+        checkInput();
     }
 public boolean checkInput() {
         if(txtBagNo.getText() == null 
@@ -115,12 +118,19 @@ public boolean checkInput() {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Blood Bag No");
 
+        txtBagNo.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Blood Group");
 
         selectBloodGroup.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         selectBloodGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" }));
+        selectBloodGroup.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectBloodGroupItemStateChanged(evt);
+            }
+        });
         selectBloodGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectBloodGroupActionPerformed(evt);
@@ -131,9 +141,13 @@ public boolean checkInput() {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Donor Id");
 
+        txtDonorName.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Blood Volume");
+
+        txtBloodVolume.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,6 +156,9 @@ public boolean checkInput() {
         jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Donation Date");
+
+        txtDonationDate.setDateFormatString("yyyy,mm,dd");
+        txtDonationDate.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
@@ -173,7 +190,7 @@ public boolean checkInput() {
             }
         });
 
-        selectDonorId.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectDonorId.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -321,6 +338,26 @@ public boolean checkInput() {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void selectBloodGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectBloodGroupItemStateChanged
+        selectDonorId.removeAllItems();
+        conn = DbConnection.ConnectDb();
+        try {
+            String blood = selectBloodGroup.getSelectedItem().toString();
+            String selectQuery = "SELECT * FROM donor WHERE bloodGroup='"+blood+"'";
+            PreparedStatement pst = conn.prepareStatement(selectQuery);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()) {
+            selectDonorId.addItem(rs.getString("id"));
+            }
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_selectBloodGroupItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -351,7 +388,7 @@ public boolean checkInput() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddReceiver().setVisible(true);
+                new BloodBag().setVisible(true);
             }
         });
     }

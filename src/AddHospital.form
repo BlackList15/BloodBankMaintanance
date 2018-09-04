@@ -169,7 +169,7 @@
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtDistance" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="94" max="32767" attributes="0"/>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton3" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
@@ -226,10 +226,25 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDoctor">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtContact">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDistance">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
@@ -283,6 +298,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAddress">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -296,6 +316,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtHospital">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -309,6 +334,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDocContact">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

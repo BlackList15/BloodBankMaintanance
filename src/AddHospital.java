@@ -121,6 +121,12 @@ public class AddHospital extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Distance");
 
+        txtDoctor.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
+        txtContact.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
+        txtDistance.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jButton1.setBackground(new java.awt.Color(0, 0, 102));
         jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 102));
@@ -151,13 +157,19 @@ public class AddHospital extends javax.swing.JFrame {
             }
         });
 
+        txtAddress.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Chief Doctor Name");
 
+        txtHospital.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Chief Contact No");
+
+        txtDocContact.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -222,7 +234,7 @@ public class AddHospital extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtDistance, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,7 +347,7 @@ public class AddHospital extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddReceiver().setVisible(true);
+                new AddHospital().setVisible(true);
             }
         });
     }

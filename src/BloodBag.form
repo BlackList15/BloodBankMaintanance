@@ -210,6 +210,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBagNo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -241,6 +246,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="selectBloodGroupItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectBloodGroupActionPerformed"/>
           </Events>
         </Component>
@@ -256,6 +262,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDonorName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -269,6 +280,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBloodVolume">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -293,6 +309,12 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="txtDonationDate">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy,mm,dd"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
@@ -347,13 +369,11 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="selectDonorId">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
         </Component>

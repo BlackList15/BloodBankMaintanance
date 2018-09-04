@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2018 at 05:02 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: Sep 04, 2018 at 03:59 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,20 +29,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bloodbag` (
-  `Bno` varchar(6) NOT NULL,
+  `Bno` int(6) NOT NULL,
   `Bgroup` varchar(3) NOT NULL,
-  `DId` varchar(6) NOT NULL,
+  `DId` int(6) NOT NULL,
   `Dname` varchar(25) NOT NULL,
   `Bvolume` int(11) NOT NULL,
   `Ddate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `bloodbag`
---
-
-INSERT INTO `bloodbag` (`Bno`, `Bgroup`, `DId`, `Dname`, `Bvolume`, `Ddate`) VALUES
-('123456', 'O+', 'SV1234', 'adharva', 200, '2018-09-04');
 
 -- --------------------------------------------------------
 
@@ -61,6 +54,14 @@ CREATE TABLE `donor` (
   `bloodGroup` char(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `donor`
+--
+
+INSERT INTO `donor` (`id`, `name`, `email`, `address`, `contact`, `gender`, `dateOfBirth`, `bloodGroup`) VALUES
+(1, 'Karshan', 'karshan@gmail.com', 'Wattala', 777561423, 'male', '2011-03-06', 'B+'),
+(2, 'Vijay', 'vj44@gmail.com', 'Colombo', 777865489, 'male', '2014-12-02', 'O-');
+
 -- --------------------------------------------------------
 
 --
@@ -68,8 +69,8 @@ CREATE TABLE `donor` (
 --
 
 CREATE TABLE `hospital` (
-  `id` int(11) NOT NULL,
-  `hosName` varchar(40) NOT NULL,
+  `id` int(6) NOT NULL,
+  `hosName` varchar(20) NOT NULL,
   `hosContact` int(10) NOT NULL,
   `address` varchar(40) NOT NULL,
   `disFromHere` float NOT NULL,
@@ -82,8 +83,8 @@ CREATE TABLE `hospital` (
 --
 
 INSERT INTO `hospital` (`id`, `hosName`, `hosContact`, `address`, `disFromHere`, `cheifDocName`, `cheifDocCon`) VALUES
-(1, 'hemas', 115142632, 'wattala', 23.2, 'j.k.silva', 777254855),
-(1, 'hemas', 115142632, 'wattala', 23.2, 'j.k.silva', 777254855);
+(1, 'Hemas', 1158469521, 'Wattala', 15.2, 'K.J.Perera', 777569532),
+(2, 'Nawaloka', 115689742, 'Colombo', 54.3, 'D.Silva', 758964213);
 
 -- --------------------------------------------------------
 
@@ -138,6 +139,12 @@ ALTER TABLE `donor`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `hospital`
+--
+ALTER TABLE `hospital`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
@@ -151,7 +158,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `hospital`
+--
+ALTER TABLE `hospital`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -128,6 +128,12 @@ public class AddDonor extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Blood Group");
 
+        txtDonor.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
+        txtEmail.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
+        txtContact.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         selectBlood.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         selectBlood.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" }));
         selectBlood.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +172,8 @@ public class AddDonor extends javax.swing.JFrame {
             }
         });
 
+        txtAddress.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jLabel11.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Date of Birth");
@@ -189,6 +197,9 @@ public class AddDonor extends javax.swing.JFrame {
                 femaleActionPerformed(evt);
             }
         });
+
+        txtDateOfBirth.setDateFormatString("yyyy,mm,dd");
+        txtDateOfBirth.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -262,7 +273,7 @@ public class AddDonor extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -180,7 +180,7 @@
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtContact" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="96" max="32767" attributes="0"/>
+                  <EmptySpace pref="99" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton3" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
@@ -259,10 +259,25 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDonor">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmail">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtContact">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="selectBlood">
           <Properties>
@@ -338,6 +353,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAddress">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -385,6 +405,12 @@
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="txtDateOfBirth">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy,mm,dd"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="20" style="1"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
