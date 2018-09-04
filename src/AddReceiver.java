@@ -475,7 +475,9 @@ public class AddReceiver extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             
             while(rs.next()) {
-            selectBloodBag.addItem(rs.getString("Bno"));
+            String id1 = rs.getString("bId");
+            String id2 = rs.getString("Bno");
+            selectBloodBag.addItem(id1 + id2);
             }
             
             

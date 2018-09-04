@@ -349,7 +349,9 @@ public boolean checkInput() {
             ResultSet rs = pst.executeQuery();
             
             while(rs.next()) {
-            selectDonorId.addItem(rs.getString("id"));
+            String id1 = rs.getString("dId");
+            String id2 = rs.getString("id");
+            selectDonorId.addItem(id1+id2);
             }
             
             
