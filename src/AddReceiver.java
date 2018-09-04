@@ -10,6 +10,7 @@
  */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
@@ -18,11 +19,14 @@ import javax.swing.JOptionPane;
 public class AddReceiver extends javax.swing.JFrame {
     Connection conn=null;
     PreparedStatement pst=null;
+    ResultSet rs = null;
     /**
      * Creates new form AddReceiver
      */
     public AddReceiver() {
         initComponents();
+        checkInputReceiver();
+        fillHospitalName();
     }
 
     public boolean checkInputReceiver(){
@@ -33,9 +37,36 @@ public class AddReceiver extends javax.swing.JFrame {
            || selectBloodGroup.getSelectedItem()== null
            || txtDonorId.getText() == null
            || txtTransactionDate.getDate()== null) {
-                  } 
-        return false;
-
+             return false;
+         } 
+        else {
+            try{
+                Integer.parseInt(txtDonorId.getText());
+                return true;
+                
+            }catch(Exception ex) {
+                return false;
+            }       
+        }
+    }
+    
+    private void fillHospitalName() {
+        conn = DbConnection.ConnectDb();
+        
+        try {
+            String selectQuery = "SELECT * FROM hospital";
+            pst = conn.prepareStatement(selectQuery);
+            rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                selectHospital.addItem(rs.getString("hosName"));
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,11 +147,18 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Patient Name");
 
+        txtPatient.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Hospital");
 
-        selectHospital.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectHospital.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        selectHospital.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectHospitalItemStateChanged(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,6 +167,9 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Chief Doctor");
+
+        txtChiefDoctor.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtChiefDoctor.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,6 +187,8 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Donor Id");
 
+        txtDonorId.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Blood Bag No");
@@ -154,9 +197,14 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Donor Name");
 
+        txtDonorName.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
         jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Transaction Date");
+
+        txtTransactionDate.setDateFormatString("yyyy-mm-dd");
+        txtTransactionDate.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
@@ -188,7 +236,10 @@ public class AddReceiver extends javax.swing.JFrame {
             }
         });
 
-        selectBloodBag.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtHospitalAddress.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtHospitalAddress.setEnabled(false);
+
+        selectBloodBag.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -290,7 +341,7 @@ public class AddReceiver extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(txtTransactionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,6 +438,26 @@ public class AddReceiver extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void selectHospitalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectHospitalItemStateChanged
+        conn = DbConnection.ConnectDb();
+        try {
+            String name = selectHospital.getSelectedItem().toString();
+            String selectQuery = "SELECT * FROM hospital WHERE hosName='"+name+"'";
+            PreparedStatement pst = conn.prepareStatement(selectQuery);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()) {
+            txtHospitalAddress.setText(rs.getString("address"));
+	    txtChiefDoctor.setText(rs.getString("cheifDocName"));
+            }
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_selectHospitalItemStateChanged
 
     /**
      * @param args the command line arguments
