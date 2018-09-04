@@ -335,6 +335,7 @@ public class AddDonor extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        UpdateDonor updateDonor = new UpdateDonor();
         if(checkInputDonor()) {
             conn = DbConnection.ConnectDb();
             
@@ -355,6 +356,7 @@ public class AddDonor extends javax.swing.JFrame {
                 pst.setString(7, value);
                 
                 pst.executeUpdate();
+                updateDonor.showDonorList();
                 JOptionPane.showMessageDialog(null, "Data Inserted");
                 
             } catch (SQLException ex) {

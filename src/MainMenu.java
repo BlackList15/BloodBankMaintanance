@@ -175,7 +175,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Donor d = new Donor();
+        UpdateDonor d = new UpdateDonor();
         d.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

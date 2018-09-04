@@ -1,3 +1,14 @@
+
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,13 +18,62 @@
  *
  * @author Ashik
  */
-public class Hospital extends javax.swing.JFrame {
+public class UpdateDonor extends javax.swing.JFrame {
+    Connection conn = null;
+    
+    
 
     /**
-     * Creates new form UpdateDonor
+     * Creates new form Donor
      */
-    public Hospital() {
+    public UpdateDonor() {
         initComponents();
+        showDonorList();
+    }
+    
+    public ArrayList<Donor> getDonorList() {
+        ArrayList<Donor> donorList = new ArrayList<Donor>();
+        conn = DbConnection.ConnectDb();
+        String selectQuery = "SELECT * FROM donor";
+        
+        try {
+            PreparedStatement pst = conn.prepareStatement(selectQuery);
+            ResultSet rs = pst.executeQuery();
+            Donor donor;
+            
+            while(rs.next()) {
+            String id1 = rs.getString("dId");
+            String id2 = rs.getString("id");
+                donor = new Donor(id1 + id2,rs.getString("name"),rs.getString("email"),rs.getString("address"),Integer.parseInt(rs.getString("contact")),
+                rs.getString("gender"),rs.getString("dateOfBirth"),rs.getString("bloodGroup"));
+                donorList.add(donor);
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Donor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return donorList; 
+    }
+    
+    public void showDonorList() {
+        ArrayList<Donor> list = getDonorList();
+        DefaultTableModel model = (DefaultTableModel) jTableDonor.getModel();
+        
+        Object[] row = new Object[8];
+        for(int i=0; i < list.size(); i++) {
+            
+            row[0] = list.get(i).getDonorId();
+            row[1] = list.get(i).getName();
+            row[2] = list.get(i).getEmail();
+            row[3] = list.get(i).getAddress();
+            row[4] = list.get(i).getContact();
+            row[5] = list.get(i).getGender();
+            row[6] = list.get(i).getDateOfBirth();
+            row[7] = list.get(i).getBloodGroup();
+            
+            model.addRow(row);
+        }
+        
     }
 
     /**
@@ -37,6 +97,8 @@ public class Hospital extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableDonor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,7 +152,7 @@ public class Hospital extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 48)); // NOI18N
-        jLabel4.setText("Hospital");
+        jLabel4.setText("Donor");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -152,15 +214,43 @@ public class Hospital extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 255));
 
+        jTableDonor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTableDonor.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
+        jTableDonor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DonorId", "Name", "Email", "Address", "Contact", "Gender", "DateOfBirth", "BloodGrup"
+            }
+        ));
+        jTableDonor.setRowHeight(25);
+        jTableDonor.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                jTableDonorAncestorRemoved(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableDonor);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 556, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,9 +284,14 @@ public class Hospital extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        AddHospital ah = new AddHospital();
-        ah.setVisible(true);
+        AddDonor ad = new AddDonor();
+        ad.setVisible(true);
+    // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTableDonorAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTableDonorAncestorRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableDonorAncestorRemoved
 
     /**
      * @param args the command line arguments
@@ -244,6 +339,8 @@ public class Hospital extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableDonor;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
