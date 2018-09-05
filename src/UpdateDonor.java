@@ -11,7 +11,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -80,6 +82,14 @@ public class UpdateDonor extends javax.swing.JFrame {
         }
         
     }
+    
+    public void searchDonor(String query){
+        DefaultTableModel model = (DefaultTableModel) tableDonor.getModel();
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<DefaultTableModel>(model);
+        tableDonor.setRowSorter(trs);
+        
+        trs.setRowFilter(RowFilter.regexFilter(query));
+}
     
     public void showDonor(int index) throws ParseException {
         AddDonor ad = new AddDonor();
@@ -182,6 +192,11 @@ public class UpdateDonor extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
@@ -382,6 +397,21 @@ public class UpdateDonor extends javax.swing.JFrame {
         txtBgroup.setText(getDonorList().get(index).getBloodGroup());
         
     }//GEN-LAST:event_tableDonorMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(txtDname.getText().toLowerCase().equals("") && txtBgroup.getText().equals("")) {
+            String query2 = txtId.getText();
+            searchDonor(query2);
+        }
+        else if(txtId.getText().equals("") && txtBgroup.getText().equals("")) {
+            String query = txtDname.getText().toLowerCase();
+            searchDonor(query);
+        }
+        else if(txtId.getText().equals("") && txtDname.getText().toLowerCase().equals("")) {
+        String query1 = txtBgroup.getText();
+        searchDonor(query1);
+        }    
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

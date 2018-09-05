@@ -77,7 +77,7 @@ public class AddDonor extends javax.swing.JFrame {
         buttonUpdate = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -346,8 +346,7 @@ public class AddDonor extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonResetActionPerformed
 
     private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
-        // TODO add your handling code here:
-        System.exit(1);
+        this.dispose();
     }//GEN-LAST:event_buttonExitActionPerformed
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
@@ -446,7 +445,7 @@ public class AddDonor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonExit;
+    public javax.swing.JButton buttonExit;
     public javax.swing.JButton buttonReset;
     public javax.swing.JButton buttonSave;
     public javax.swing.JButton buttonUpdate;
@@ -460,7 +459,7 @@ public class AddDonor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     public javax.swing.JRadioButton male;
     public javax.swing.JComboBox selectBlood;
