@@ -105,7 +105,8 @@ public class UpdateDonor extends javax.swing.JFrame {
                     }
         }
         ad.setVisible(true);
-        
+        ad.buttonSave.setEnabled(false);
+        ad.buttonReset.setEnabled(false);
     }
 
     /**
@@ -118,8 +119,8 @@ public class UpdateDonor extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtBgroup = new javax.swing.JTextField();
+        txtDname = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -136,18 +137,21 @@ public class UpdateDonor extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 0, 102));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtBgroup.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtBgroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtBgroupActionPerformed(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtDname.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtDname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtDnameActionPerformed(evt);
             }
         });
 
+        txtId.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
@@ -203,8 +207,8 @@ public class UpdateDonor extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(155, 155, 155)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,10 +246,10 @@ public class UpdateDonor extends javax.swing.JFrame {
                                     .addComponent(jLabel1))
                                 .addGap(38, 38, 38)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDname, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
                                 .addGap(47, 47, 47)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtBgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(67, 67, 67))))
         );
 
@@ -313,22 +317,32 @@ public class UpdateDonor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtBgroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBgroupActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtBgroupActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtDnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtDnameActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        AddDonor ad = new AddDonor();
-        ad.setVisible(true);
-    // TODO add your handling code here:
+        int index = tableDonor.getSelectedRow();
+        if(tableDonor.isRowSelected(index)) {
+            try {
+                showDonor(index);
+            } catch (ParseException ex) {
+                Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        else {
+            AddDonor addDonor = new AddDonor();
+            addDonor.setVisible(true);
+            addDonor.buttonUpdate.setEnabled(false);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tableDonorAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tableDonorAncestorRemoved
@@ -362,11 +376,10 @@ public class UpdateDonor extends javax.swing.JFrame {
 
     private void tableDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDonorMouseClicked
         int index = tableDonor.getSelectedRow();
-        try {
-            showDonor(index);
-        } catch (ParseException ex) {
-            Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        txtId.setText(getDonorList().get(index).getDonorId());
+        txtDname.setText(getDonorList().get(index).getName());
+        txtBgroup.setText(getDonorList().get(index).getBloodGroup());
         
     }//GEN-LAST:event_tableDonorMouseClicked
 
@@ -417,9 +430,9 @@ public class UpdateDonor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tableDonor;
+    private javax.swing.JTextField txtBgroup;
+    private javax.swing.JTextField txtDname;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }
