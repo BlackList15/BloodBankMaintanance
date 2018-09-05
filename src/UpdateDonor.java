@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -58,7 +61,7 @@ public class UpdateDonor extends javax.swing.JFrame {
     
     public void showDonorList() {
         ArrayList<Donor> list = getDonorList();
-        DefaultTableModel model = (DefaultTableModel) jTableDonor.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableDonor.getModel();
         
         model.setRowCount(0);
         Object[] row = new Object[8];
@@ -75,6 +78,33 @@ public class UpdateDonor extends javax.swing.JFrame {
             
             model.addRow(row);
         }
+        
+    }
+    
+    public void showDonor(int index) throws ParseException {
+        AddDonor ad = new AddDonor();
+        
+        ad.txtDonor.setText(getDonorList().get(index).getName());
+        ad.txtEmail.setText(getDonorList().get(index).getEmail());
+        ad.txtAddress.setText(getDonorList().get(index).getAddress());
+        ad.txtContact.setText(Integer.toString(getDonorList().get(index).getContact()));
+        
+        if(getDonorList().get(index).getGender().equals("male")) {
+                    ad.male.setSelected(true);
+                }
+                else {
+                    ad.female.setSelected(true);
+                }
+        Date addDate = new SimpleDateFormat("yyyy-mm-dd").parse((String)getDonorList().get(index).getDateOfBirth());
+        ad.txtDateOfBirth.setDate(addDate);
+        
+        for(int i=0; i < ad.selectBlood.getItemCount(); i++) {
+            String blood = getDonorList().get(index).getBloodGroup();
+            if(ad.selectBlood.getItemAt(i).equals(blood)) {
+                ad.selectBlood.setSelectedIndex(i);
+                    }
+        }
+        ad.setVisible(true);
         
     }
 
@@ -100,7 +130,7 @@ public class UpdateDonor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableDonor = new javax.swing.JTable();
+        tableDonor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,9 +251,9 @@ public class UpdateDonor extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 255));
 
-        jTableDonor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTableDonor.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
-        jTableDonor.setModel(new javax.swing.table.DefaultTableModel(
+        tableDonor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tableDonor.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
+        tableDonor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -231,17 +261,22 @@ public class UpdateDonor extends javax.swing.JFrame {
                 "DonorId", "Name", "Email", "Address", "Contact", "Gender", "DateOfBirth", "BloodGrup"
             }
         ));
-        jTableDonor.setRowHeight(25);
-        jTableDonor.addAncestorListener(new javax.swing.event.AncestorListener() {
+        tableDonor.setRowHeight(25);
+        tableDonor.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                jTableDonorAncestorRemoved(evt);
+                tableDonorAncestorRemoved(evt);
             }
         });
-        jScrollPane1.setViewportView(jTableDonor);
+        tableDonor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDonorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableDonor);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -296,9 +331,9 @@ public class UpdateDonor extends javax.swing.JFrame {
     // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTableDonorAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTableDonorAncestorRemoved
+    private void tableDonorAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tableDonorAncestorRemoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTableDonorAncestorRemoved
+    }//GEN-LAST:event_tableDonorAncestorRemoved
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(!txtId.getText().equals("")) {
@@ -324,6 +359,16 @@ public class UpdateDonor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Donor not deleted : No Id to Delete");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tableDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDonorMouseClicked
+        int index = tableDonor.getSelectedRow();
+        try {
+            showDonor(index);
+        } catch (ParseException ex) {
+            Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_tableDonorMouseClicked
 
     /**
      * @param args the command line arguments
@@ -372,9 +417,9 @@ public class UpdateDonor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableDonor;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tableDonor;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

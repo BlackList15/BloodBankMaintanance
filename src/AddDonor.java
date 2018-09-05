@@ -330,7 +330,7 @@ public class AddDonor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        System.exit(1);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -425,7 +425,7 @@ public class AddDonor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton female;
+    public javax.swing.JRadioButton female;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -440,13 +440,13 @@ public class AddDonor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton male;
-    private javax.swing.JComboBox selectBlood;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtContact;
-    private com.toedter.calendar.JDateChooser txtDateOfBirth;
-    private javax.swing.JTextField txtDonor;
-    private javax.swing.JTextField txtEmail;
+    public javax.swing.JRadioButton male;
+    public javax.swing.JComboBox selectBlood;
+    public javax.swing.JTextField txtAddress;
+    public javax.swing.JTextField txtContact;
+    public com.toedter.calendar.JDateChooser txtDateOfBirth;
+    public javax.swing.JTextField txtDonor;
+    public javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
     private String gender;
 }
