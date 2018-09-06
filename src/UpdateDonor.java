@@ -144,6 +144,7 @@ public class UpdateDonor extends javax.swing.JFrame {
         tableDonor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1928, 1081));
 
         jPanel1.setBackground(new java.awt.Color(51, 0, 102));
 

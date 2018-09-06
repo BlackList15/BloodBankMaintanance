@@ -149,6 +149,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
         tableReceiver = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1928, 1081));
 
         jPanel2.setBackground(new java.awt.Color(51, 0, 102));
 

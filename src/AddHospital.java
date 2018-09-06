@@ -81,6 +81,7 @@ public class AddHospital extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
+        setPreferredSize(new java.awt.Dimension(1928, 1081));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

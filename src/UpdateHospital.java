@@ -128,6 +128,7 @@ public class UpdateHospital extends javax.swing.JFrame {
         tableHospital = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1928, 1081));
 
         jPanel1.setBackground(new java.awt.Color(51, 0, 102));
 
