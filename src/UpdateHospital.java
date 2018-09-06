@@ -406,7 +406,7 @@ public class UpdateHospital extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableHospital;
-    private javax.swing.JTextField txtHospitalId;
+    public javax.swing.JTextField txtHospitalId;
     private javax.swing.JTextField txtHospitalName;
     // End of variables declaration//GEN-END:variables
 }

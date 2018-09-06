@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /*
@@ -178,6 +179,11 @@ public class AddHospital extends javax.swing.JFrame {
         txtDocContact.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -334,6 +340,48 @@ public class AddHospital extends javax.swing.JFrame {
     private void txtHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHospitalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHospitalActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        try {
+            DbConnection db = new DbConnection();
+            Connection cn = db.ConnectDb();
+            Statement st = cn.createStatement();
+            PreparedStatement preparedStatement = null;
+            
+            UpdateHospital uh = new UpdateHospital();
+            
+            
+            String nm = txtHospital.getText();
+            int cnt = Integer.parseInt(txtContact.getText());
+            String ad =txtAddress.getText();
+            float dis = Float.parseFloat(txtDistance.getText());
+            String doc = txtDoctor.getText();
+            int docCon = Integer.parseInt(txtDocContact.getText());
+            
+            String hosid = uh.txtHospitalId.getText();
+            int i = Integer.parseInt(hosid.substring(1,4));
+           
+            
+            String updateSQL = "update Hospital set hosName=?,hosContact=?,address=?, disFromHere=?, cheifDocName=?, cheifDocCon=? where id=?";
+
+                        
+			preparedStatement = cn.prepareStatement(updateSQL);
+			preparedStatement.setString(1,nm);
+                        preparedStatement.setInt(2,cnt);
+                        preparedStatement.setString(3,ad);
+                        preparedStatement.setFloat(4,dis);
+                        preparedStatement.setString(5,doc);
+                        preparedStatement.setInt(6,docCon);
+                        preparedStatement.setInt(7,i);
+			preparedStatement.executeUpdate();
+                        
+                        JOptionPane.showMessageDialog(null, "Successfully Updated Hospital data");
+        
+            
+        } catch (SQLException ex) {
+           System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments

@@ -170,7 +170,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        Receiver r = new Receiver();
+        UpdateReceiver r = new UpdateReceiver();
         r.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
