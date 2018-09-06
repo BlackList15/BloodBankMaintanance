@@ -72,7 +72,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Just donate Blood");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ashik\\Desktop\\Blood Bank\\BloodBank\\Images\\doctor-clinic-illustration_1270-69.jpg")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/doctor-clinic-illustration_1270-69.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -161,7 +161,7 @@ public class Login extends javax.swing.JFrame {
         txtpwd.setForeground(new java.awt.Color(255, 255, 255));
         txtpwd.setBorder(null);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ashik\\Desktop\\Blood Bank\\BloodBank\\Images\\images (1).png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images (1).png"))); // NOI18N
         jLabel7.setText("jLabel7");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

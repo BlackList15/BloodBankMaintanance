@@ -149,7 +149,7 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ashik\Desktop\Blood Bank\BloodBank\Images\doctor-clinic-illustration_1270-69.jpg"/>
+              <Image iconType="3" name="/doctor-clinic-illustration_1270-69.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel4"/>
           </Properties>
@@ -313,7 +313,7 @@
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Ashik\Desktop\Blood Bank\BloodBank\Images\images (1).png"/>
+              <Image iconType="3" name="/images (1).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel7"/>
           </Properties>
