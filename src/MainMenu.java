@@ -180,7 +180,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Hospital h = new Hospital();
+        UpdateHospital h = new UpdateHospital();
         h.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

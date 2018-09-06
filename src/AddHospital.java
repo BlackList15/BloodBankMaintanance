@@ -67,14 +67,15 @@ public class AddHospital extends javax.swing.JFrame {
         txtDoctor = new javax.swing.JTextField();
         txtContact = new javax.swing.JTextField();
         txtDistance = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         txtAddress = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtHospital = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtDocContact = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -127,13 +128,13 @@ public class AddHospital extends javax.swing.JFrame {
 
         txtDistance.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 102));
-        jButton1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 102));
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnReset.setBackground(new java.awt.Color(0, 0, 102));
+        btnReset.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
+        btnReset.setForeground(new java.awt.Color(0, 0, 102));
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -147,13 +148,13 @@ public class AddHospital extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 102));
-        jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 102));
-        jButton3.setText("Save");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setBackground(new java.awt.Color(0, 0, 102));
+        btnSave.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(0, 0, 102));
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -164,12 +165,19 @@ public class AddHospital extends javax.swing.JFrame {
         jLabel8.setText("Chief Doctor Name");
 
         txtHospital.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHospitalActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Chief Contact No");
 
         txtDocContact.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+
+        btnUpdate.setText("Update");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -199,12 +207,16 @@ public class AddHospital extends javax.swing.JFrame {
                 .addGap(65, 65, 65))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(163, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(159, 159, 159))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(389, 389, 389)
+                .addComponent(btnUpdate)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,10 +248,12 @@ public class AddHospital extends javax.swing.JFrame {
                     .addComponent(txtDistance, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69))
+                .addGap(31, 31, 31)
+                .addComponent(btnUpdate)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
@@ -276,21 +290,21 @@ public class AddHospital extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
        txtHospital.setText("");
         txtContact.setText("");
         txtAddress.setText("");
         txtDistance.setText("");
         txtDoctor.setText("");
         txtDocContact.setText(""); 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnResetActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         if(checkInput()) {
             conn = DbConnection.ConnectDb();
@@ -315,7 +329,11 @@ public class AddHospital extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "One or More Field Are Empty");
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHospitalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHospitalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,9 +371,10 @@ public class AddHospital extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton btnReset;
+    public javax.swing.JButton btnSave;
+    public javax.swing.JButton btnUpdate;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -366,11 +385,11 @@ public class AddHospital extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtContact;
-    private javax.swing.JTextField txtDistance;
-    private javax.swing.JTextField txtDocContact;
-    private javax.swing.JTextField txtDoctor;
-    private javax.swing.JTextField txtHospital;
+    public javax.swing.JTextField txtAddress;
+    public javax.swing.JTextField txtContact;
+    public javax.swing.JTextField txtDistance;
+    public javax.swing.JTextField txtDocContact;
+    public javax.swing.JTextField txtDoctor;
+    public javax.swing.JTextField txtHospital;
     // End of variables declaration//GEN-END:variables
 }
