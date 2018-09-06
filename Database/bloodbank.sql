@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2018 at 07:28 AM
+-- Generation Time: Sep 06, 2018 at 10:45 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -32,7 +32,7 @@ CREATE TABLE `bloodbag` (
   `bId` char(2) NOT NULL DEFAULT 'BB',
   `Bno` int(3) UNSIGNED ZEROFILL NOT NULL,
   `Bgroup` varchar(3) NOT NULL,
-  `DId` int(6) NOT NULL,
+  `DId` varchar(6) NOT NULL,
   `Dname` varchar(25) NOT NULL,
   `Bvolume` int(11) NOT NULL,
   `Ddate` date NOT NULL
@@ -43,7 +43,8 @@ CREATE TABLE `bloodbag` (
 --
 
 INSERT INTO `bloodbag` (`bId`, `Bno`, `Bgroup`, `DId`, `Dname`, `Bvolume`, `Ddate`) VALUES
-('BB', 001, 'O-', 2, 'Vijay', 300, '2018-07-04');
+('BB', 001, 'O-', 'DON002', 'Vijay', 300, '2018-07-04'),
+('BB', 002, 'B+', 'DON007', 'dhanush', 300, '2018-09-02');
 
 -- --------------------------------------------------------
 
@@ -68,9 +69,9 @@ CREATE TABLE `donor` (
 --
 
 INSERT INTO `donor` (`dId`, `id`, `name`, `email`, `address`, `contact`, `gender`, `dateOfBirth`, `bloodGroup`) VALUES
-('DON', 001, 'Karshan', 'karshan@gmail.com', 'Wattala', 777561423, 'male', '2011-03-06', 'B+'),
-('DON', 002, 'Vijay', 'vj44@gmail.com', 'Colombo', 777865489, 'male', '2014-12-02', 'O-'),
-('DON', 003, 'Ajith', 'ajith47@gmail.com', 'kandy', 775487963, 'male', '2004-04-05', 'AB+');
+('DON', 005, 'Karshan', 'karshan96@gmail.com', 'Wattala', 775846932, 'male', '1996-03-01', 'B+'),
+('DON', 006, 'vijay', 'vj@gmail.com', 'galle', 758469521, 'male', '2008-06-24', 'AB+'),
+('DON', 007, 'dhanush', 'dhanush123@gmail.com', 'jaffna', 789564123, 'male', '2001-04-17', 'B+');
 
 -- --------------------------------------------------------
 
@@ -122,16 +123,23 @@ INSERT INTO `login` (`id`, `password`) VALUES
 --
 
 CREATE TABLE `receiver` (
-  `patientName` varchar(15) NOT NULL,
-  `hospital` varchar(15) NOT NULL,
-  `hospitalAddress` varchar(25) NOT NULL,
-  `chiefDoctor` varchar(15) NOT NULL,
+  `patientName` varchar(20) NOT NULL,
+  `hospital` varchar(20) NOT NULL,
+  `hospitalAddress` varchar(40) NOT NULL,
+  `chiefDoctor` varchar(20) NOT NULL,
   `bloodGroup` varchar(3) NOT NULL,
-  `donorId` int(11) NOT NULL,
-  `donorName` varchar(15) NOT NULL,
-  `bagNo` int(11) NOT NULL,
+  `donorId` varchar(6) NOT NULL,
+  `donorName` varchar(20) NOT NULL,
+  `bagNo` varchar(5) NOT NULL,
   `transactionDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `receiver`
+--
+
+INSERT INTO `receiver` (`patientName`, `hospital`, `hospitalAddress`, `chiefDoctor`, `bloodGroup`, `donorId`, `donorName`, `bagNo`, `transactionDate`) VALUES
+('kumar', 'Hemas', 'Wattala', 'K.J.Perera', 'O-', 'DON002', 'Vijay', 'BB001', '2018-09-04');
 
 --
 -- Indexes for dumped tables
@@ -169,7 +177,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id` int(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `hospital`

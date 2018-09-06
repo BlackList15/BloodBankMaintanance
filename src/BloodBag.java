@@ -142,6 +142,16 @@ public boolean checkInput() {
         jLabel6.setText("Donor Id");
 
         txtDonorName.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtDonorName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDonorNameMouseClicked(evt);
+            }
+        });
+        txtDonorName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDonorNameKeyPressed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -191,6 +201,11 @@ public boolean checkInput() {
         });
 
         selectDonorId.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        selectDonorId.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectDonorIdItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -329,7 +344,7 @@ public boolean checkInput() {
          txtDonorName.setText(""); 
          txtBloodVolume.setText(""); 
          txtDonationDate.setDate(null);
-         selectBloodGroup.setSelectedItem(null);
+         selectBloodGroup.setSelectedIndex(0);
          selectDonorId.setSelectedItem(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -340,6 +355,7 @@ public boolean checkInput() {
 
     private void selectBloodGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectBloodGroupItemStateChanged
         selectDonorId.removeAllItems();
+        txtDonorName.setText("");
         conn = DbConnection.ConnectDb();
         try {
             String blood = selectBloodGroup.getSelectedItem().toString();
@@ -359,6 +375,34 @@ public boolean checkInput() {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_selectBloodGroupItemStateChanged
+
+    private void txtDonorNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDonorNameKeyPressed
+        
+    }//GEN-LAST:event_txtDonorNameKeyPressed
+
+    private void txtDonorNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDonorNameMouseClicked
+        conn = DbConnection.ConnectDb();
+        try {
+            String id = selectDonorId.getSelectedItem().toString();
+            String i = id.substring(3,6);
+            String selectQuery = "SELECT * FROM donor WHERE id ='"+i+"'";
+            PreparedStatement pst = conn.prepareStatement(selectQuery);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()) {
+            txtDonorName.setText(rs.getString("name"));
+            }
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtDonorNameMouseClicked
+
+    private void selectDonorIdItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectDonorIdItemStateChanged
+        txtDonorName.setText("");
+    }//GEN-LAST:event_selectDonorIdItemStateChanged
 
     /**
      * @param args the command line arguments

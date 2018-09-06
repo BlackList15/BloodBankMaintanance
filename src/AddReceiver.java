@@ -41,7 +41,6 @@ public class AddReceiver extends javax.swing.JFrame {
          } 
         else {
             try{
-                Integer.parseInt(txtDonorId.getText());
                 return true;
                 
             }catch(Exception ex) {
@@ -193,6 +192,11 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel6.setText("Donor Id");
 
         txtDonorId.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtDonorId.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDonorIdMouseClicked(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,6 +207,11 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel9.setText("Donor Name");
 
         txtDonorName.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtDonorName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDonorNameMouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -245,6 +254,11 @@ public class AddReceiver extends javax.swing.JFrame {
         txtHospitalAddress.setEnabled(false);
 
         selectBloodBag.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        selectBloodBag.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectBloodBagItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -386,7 +400,7 @@ public class AddReceiver extends javax.swing.JFrame {
             conn = DbConnection.ConnectDb();
             
             try {
-                pst = conn.prepareStatement("INSERT into receiver(Patientname,hospital,hospitalAddress,chiefDoctor,bloodGroup,donorId,donorName,bagNo,transactionDate)"
+                pst = conn.prepareStatement("INSERT into receiver(patientName,hospital,hospitalAddress,chiefDoctor,bloodGroup,donorId,donorName,bagNo,transactionDate)"
                         + "values(?,?,?,?,?,?,?,?,?)");
                 pst.setString(1, txtPatient.getText());
                
@@ -407,7 +421,7 @@ public class AddReceiver extends javax.swing.JFrame {
                 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
                 String transactionDate = dateFormat.format(txtTransactionDate.getDate());
-                pst.setString(8, transactionDate);
+                pst.setString(9, transactionDate);
                 
                
                 
@@ -424,18 +438,16 @@ public class AddReceiver extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         txtPatient.setText("");
-            selectHospital.setSelectedItem("");
+            selectHospital.setSelectedIndex(0);
             txtHospitalAddress.setText("");
             txtChiefDoctor.setText("");
-            selectBloodGroup.setSelectedItem(null);
-            selectBloodBag.setSelectedItem("");
+            selectBloodGroup.setSelectedIndex(0);
+            selectBloodBag.setSelectedItem(null);
             txtDonorId.setText("");
             txtDonorName.setText("");
             txtTransactionDate.setDate(null);
-
-         
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -466,6 +478,9 @@ public class AddReceiver extends javax.swing.JFrame {
 
     private void selectBloodGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectBloodGroupItemStateChanged
         selectBloodBag.removeAllItems();
+        txtDonorId.setText("");
+        txtDonorName.setText("");
+        
         conn = DbConnection.ConnectDb();
         try {
             String blood = selectBloodGroup.getSelectedItem().toString();
@@ -485,6 +500,51 @@ public class AddReceiver extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_selectBloodGroupItemStateChanged
+
+    private void txtDonorIdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDonorIdMouseClicked
+        conn = DbConnection.ConnectDb();
+        try {
+            String bag = selectBloodBag.getSelectedItem().toString();
+            String b = bag.substring(2,5);
+            String selectQuery = "SELECT * FROM bloodbag WHERE Bno='"+b+"'";
+            PreparedStatement pst = conn.prepareStatement(selectQuery);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                txtDonorId.setText(rs.getString("Did"));
+            }
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtDonorIdMouseClicked
+
+    private void txtDonorNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDonorNameMouseClicked
+        conn = DbConnection.ConnectDb();
+        try {
+            String bag = selectBloodBag.getSelectedItem().toString();
+            String b = bag.substring(2,5);
+            String selectQuery = "SELECT * FROM bloodbag WHERE Bno='"+b+"'";
+            PreparedStatement pst = conn.prepareStatement(selectQuery);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()) {
+                txtDonorName.setText(rs.getString("Dname"));
+            }
+            
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtDonorNameMouseClicked
+
+    private void selectBloodBagItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectBloodBagItemStateChanged
+        txtDonorId.setText("");
+        txtDonorName.setText("");
+    }//GEN-LAST:event_selectBloodBagItemStateChanged
 
     /**
      * @param args the command line arguments
