@@ -392,7 +392,8 @@ public class UpdateDonor extends javax.swing.JFrame {
     private void tableDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDonorMouseClicked
         int index = tableDonor.getSelectedRow();
         
-        txtId.setText(getDonorList().get(index).getDonorId());
+        String id = getDonorList().get(index).getDonorId().substring(3,6);
+        txtId.setText(id);
         txtDname.setText(getDonorList().get(index).getName());
         txtBgroup.setText(getDonorList().get(index).getBloodGroup());
         
@@ -484,6 +485,6 @@ public class UpdateDonor extends javax.swing.JFrame {
     private javax.swing.JTable tableDonor;
     private javax.swing.JTextField txtBgroup;
     private javax.swing.JTextField txtDname;
-    private javax.swing.JTextField txtId;
+    public javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

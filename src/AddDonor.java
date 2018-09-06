@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
@@ -405,7 +406,61 @@ public class AddDonor extends javax.swing.JFrame {
     }//GEN-LAST:event_selectBloodActionPerformed
 
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
-        // TODO add your handling code here:
+        UpdateDonor updateDonor = new UpdateDonor();
+        if(checkInputDonor()) {
+            conn = DbConnection.ConnectDb();
+            
+                /*String a = txtDonor.getText();
+                String b = txtEmail.getText();
+                String c =txtAddress.getText();
+                int d = Integer.parseInt(txtContact.getText());
+                String e = gender;
+                
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                String f = dateFormat.format(txtDateOfBirth.getDate());
+                
+                String g = selectBlood.getSelectedItem().toString();
+                
+                String h = updateDonor.txtId.getText();*/
+                
+               /* Statement st = conn.createStatement();
+                String updateQuery = "UPDATE donor SET name ='"+a+"',email ='"+b+"',address ='"+c+"',contact ='"+d+"',gender ='"+e+"',dateOfBirth ='"+f+"',bloodGroup ='"+g+"'"
+                        + " WHERE id ='"+h+"' ";
+                st.executeUpdate(updateQuery);*/
+             try {
+                String updateQuery = "UPDATE donor SET name =?,email =?,address =?,contact =?,gender =?,dateOfBirth =?,bloodGroup =?"
+                        + " WHERE id =? ";
+                
+                pst = conn.prepareStatement(updateQuery);
+                
+                pst.setString(1, txtDonor.getText());
+                pst.setString(2, txtEmail.getText());
+                pst.setString(3, txtAddress.getText());
+                pst.setInt(4, Integer.parseInt(txtContact.getText()));
+                pst.setString(5, gender);
+                
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                String addDate = dateFormat.format(txtDateOfBirth.getDate());
+                pst.setString(6, addDate);
+                
+                String value = selectBlood.getSelectedItem().toString();
+                pst.setString(7, value);
+                
+                String id = updateDonor.txtId.getText();
+                pst.setString(8, id);
+                
+                pst.executeUpdate();
+                
+                updateDonor.showDonorList();
+                JOptionPane.showMessageDialog(null, "Data Updated");
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "One or More Field Are Empty");
+        }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     /**
