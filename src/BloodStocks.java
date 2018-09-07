@@ -1,3 +1,26 @@
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.swing.GroupLayout.Alignment.CENTER;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,13 +32,80 @@
  * @author Ashik
  */
 public class BloodStocks extends javax.swing.JFrame {
-
+    
+    Connection conn = null;
     /**
      * Creates new form BloodStocks
      */
     public BloodStocks() {
         initComponents();
+        showDonorList();
+        txtStock.setText(Integer.toString(volumeOp));
     }
+    
+    public ArrayList<Blood> getBloodList() {
+        ArrayList<Blood> bloodList = new ArrayList<>();
+        conn = DbConnection.ConnectDb();
+        String selectQuery = "SELECT * FROM bloodbag";
+        
+        try {
+            PreparedStatement pst = conn.prepareStatement(selectQuery);
+            ResultSet rs = pst.executeQuery();
+            Blood blood;
+            
+            while(rs.next()) {
+                blood = new Blood(rs.getString("Bgroup"),rs.getString("Bvolume"));
+                bloodList.add(blood);
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Donor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return bloodList; 
+    }
+    
+    int volumeOp,volumeOn,volumeAp,volumeAn,volumeBp,volumeBn,volumeABp,volumeABn;
+    public void showDonorList() {
+        ArrayList<Blood> list = getBloodList();
+        DefaultTableModel model = (DefaultTableModel) tableBlood.getModel();
+        
+        model.setRowCount(0);
+        Object[] row = new Object[8];
+        volumeOp = 0;
+        volumeOn = 0;
+        volumeAp = 0;
+        volumeAn = 0;
+        volumeBp = 0;
+        volumeBn = 0;
+        volumeABp = 0;
+        volumeABn = 0;
+        for(int i=0; i < list.size(); i++) {
+            String bloodgroup = list.get(i).getbGroup();
+            int volume = Integer.parseInt(list.get(i).getbVolume());
+            
+            switch(bloodgroup) {
+                case "O+" : volumeOp = volumeOp + volume; break;
+                case "O-" : volumeOn = volumeOn + volume; break;
+                case "A+" : volumeAp = volumeAp + volume; break;
+                case "A-" : volumeAn = volumeAn + volume; break;
+                case "B+" : volumeBp = volumeBp + volume; break;
+                case "B-" : volumeBn = volumeBn + volume; break;
+                case "AB+" : volumeABp = volumeABp + volume; break;
+                case "AB-" : volumeABn = volumeABn + volume; break;
+                }
+            }
+            row[0] = volumeOp;
+            row[1] = volumeOn;
+            row[2] = volumeAp;
+            row[3] = volumeAn;
+            row[4] = volumeBp;
+            row[5] = volumeBn;
+            row[6] = volumeABp;
+            row[7] = volumeABn;
+            model.addRow(row);
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,22 +116,185 @@ public class BloodStocks extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableBlood = new javax.swing.JTable();
+        selectBlood = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtStock = new javax.swing.JTextField();
+        jPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1928, 1081));
+
+        tableBlood.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
+        tableBlood.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"
+            }
+        ));
+        tableBlood.setRowHeight(20);
+        jScrollPane1.setViewportView(tableBlood);
+        if (tableBlood.getColumnModel().getColumnCount() > 0) {
+            tableBlood.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tableBlood.getColumnModel().getColumn(1).setPreferredWidth(30);
+            tableBlood.getColumnModel().getColumn(2).setPreferredWidth(30);
+            tableBlood.getColumnModel().getColumn(3).setPreferredWidth(30);
+            tableBlood.getColumnModel().getColumn(4).setPreferredWidth(30);
+            tableBlood.getColumnModel().getColumn(5).setPreferredWidth(30);
+            tableBlood.getColumnModel().getColumn(6).setPreferredWidth(30);
+            tableBlood.getColumnModel().getColumn(7).setPreferredWidth(30);
+        }
+
+        selectBlood.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        selectBlood.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" }));
+        selectBlood.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectBloodItemStateChanged(evt);
+            }
+        });
+        selectBlood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectBloodActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel1.setText("Blood Group");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel2.setText("Stock Volume");
+
+        txtStock.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        txtStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockActionPerformed(evt);
+            }
+        });
+
+        jPanel.setBackground(new java.awt.Color(102, 255, 255));
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 581, Short.MAX_VALUE)
+        );
+
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jButton1.setText("Show BarChart");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(31, 526, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(selectBlood, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(77, 77, 77)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectBlood, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void selectBloodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBloodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectBloodActionPerformed
+
+    private void selectBloodItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectBloodItemStateChanged
+        String blood = selectBlood.getSelectedItem().toString();
+        switch(blood) {
+            case "O+" : txtStock.setText(Integer.toString(volumeOp)); break;
+            case "O-" : txtStock.setText(Integer.toString(volumeOn)); break;
+            case "A+" : txtStock.setText(Integer.toString(volumeAp)); break;
+            case "A-" : txtStock.setText(Integer.toString(volumeAn)); break;
+            case "B+" : txtStock.setText(Integer.toString(volumeBp)); break;
+            case "B-" : txtStock.setText(Integer.toString(volumeBn)); break;
+            case "AB+" : txtStock.setText(Integer.toString(volumeABp)); break;
+            case "AB-" : txtStock.setText(Integer.toString(volumeABn)); break;
+        }
+    }//GEN-LAST:event_selectBloodItemStateChanged
+
+    private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
+
+    }//GEN-LAST:event_txtStockActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultCategoryDataset barchartdata = new DefaultCategoryDataset();
+        barchartdata.setValue(volumeOp, "Stock Volume", "O+");
+        barchartdata.setValue(volumeOn, "Stock Volume", "O-");
+        barchartdata.setValue(volumeAp, "Stock Volume", "A+");
+        barchartdata.setValue(volumeAn, "Stock Volume", "A-");
+        barchartdata.setValue(volumeBp, "Stock Volume", "B+");
+        barchartdata.setValue(volumeBn, "Stock Volume", "B-");
+        barchartdata.setValue(volumeABp, "Stock Volume", "AB+");
+        barchartdata.setValue(volumeABn, "Stock Volume", "AB-");
+        
+        JFreeChart barchart = ChartFactory.createBarChart("Blood Stock Record", "Blood Group", "Blood Volume", barchartdata, PlotOrientation.VERTICAL, true, true, false);
+        
+        CategoryPlot plot = new CategoryPlot();
+        plot.setRangeGridlinePaint(Color.BLACK);
+        
+        ChartFrame chartfrm = new ChartFrame("Blood Stock Record", barchart, true);
+        chartfrm.setVisible(true);
+        chartfrm.setSize(1000,500);
+        ChartPanel chartpanel = new ChartPanel(barchart);
+        jPanel.removeAll();;
+        jPanel.add(chartpanel, BorderLayout.CENTER);
+        jPanel.validate();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +332,13 @@ public class BloodStocks extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox selectBlood;
+    private javax.swing.JTable tableBlood;
+    private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }
