@@ -34,11 +34,12 @@ public class UpdateDonor extends javax.swing.JFrame {
      */
     public UpdateDonor() {
         initComponents();
-        showDonorList();
+        showDonorList(query);
+        tableDonor.setAutoCreateRowSorter(true);
     }
-    
-    public ArrayList<Donor> getDonorList() {
-        ArrayList<Donor> donorList = new ArrayList<Donor>();
+    String query = "SELECT * FROM donor";
+    public ArrayList<Donor> getDonorList(String SelectQuery) {
+        ArrayList<Donor> donorList = new ArrayList<>();
         conn = DbConnection.ConnectDb();
         String selectQuery = "SELECT * FROM donor";
         
@@ -61,8 +62,9 @@ public class UpdateDonor extends javax.swing.JFrame {
         return donorList; 
     }
     
-    public void showDonorList() {
-        ArrayList<Donor> list = getDonorList();
+    
+    public void showDonorList(String orderQuery) {
+        ArrayList<Donor> list = getDonorList(orderQuery);
         DefaultTableModel model = (DefaultTableModel) tableDonor.getModel();
         
         model.setRowCount(0);
@@ -80,36 +82,41 @@ public class UpdateDonor extends javax.swing.JFrame {
             
             model.addRow(row);
         }
-        
+        tableDonor.setModel(model);
     }
     
     public void searchDonor(String query){
         DefaultTableModel model = (DefaultTableModel) tableDonor.getModel();
-        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<DefaultTableModel>(model);
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(model);
         tableDonor.setRowSorter(trs);
         
         trs.setRowFilter(RowFilter.regexFilter(query));
-}
+    }
+    /*public void sort() {
+        DefaultTableModel model = (DefaultTableModel) tableDonor.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+        tableDonor.setRowSorter(sorter); 
+    }*/
     
     public void showDonor(int index) throws ParseException {
         AddDonor ad = new AddDonor();
         
-        ad.txtDonor.setText(getDonorList().get(index).getName());
-        ad.txtEmail.setText(getDonorList().get(index).getEmail());
-        ad.txtAddress.setText(getDonorList().get(index).getAddress());
-        ad.txtContact.setText(Integer.toString(getDonorList().get(index).getContact()));
+        ad.txtDonor.setText(getDonorList(query).get(index).getName());
+        ad.txtEmail.setText(getDonorList(query).get(index).getEmail());
+        ad.txtAddress.setText(getDonorList(query).get(index).getAddress());
+        ad.txtContact.setText(Integer.toString(getDonorList(query).get(index).getContact()));
         
-        if(getDonorList().get(index).getGender().equals("male")) {
+        if(getDonorList(query).get(index).getGender().equals("male")) {
                     ad.male.setSelected(true);
                 }
                 else {
                     ad.female.setSelected(true);
                 }
-        Date addDate = new SimpleDateFormat("yyyy-mm-dd").parse((String)getDonorList().get(index).getDateOfBirth());
+        Date addDate = new SimpleDateFormat("yyyy-mm-dd").parse((String)getDonorList(query).get(index).getDateOfBirth());
         ad.txtDateOfBirth.setDate(addDate);
         
         for(int i=0; i < ad.selectBlood.getItemCount(); i++) {
-            String blood = getDonorList().get(index).getBloodGroup();
+            String blood = getDonorList(query).get(index).getBloodGroup();
             if(ad.selectBlood.getItemAt(i).equals(blood)) {
                 ad.selectBlood.setSelectedIndex(i);
                     }
@@ -373,10 +380,13 @@ public class UpdateDonor extends javax.swing.JFrame {
             try {
                 PreparedStatement pst = conn.prepareStatement(selectQuery);
                 String donorId = txtId.getText();
-                int id1 = Integer.parseInt(donorId.substring(3,6));
+                int id1 = Integer.parseInt(donorId);
                 pst.setInt(1, id1);
                 pst.executeUpdate();
-                showDonorList();
+                showDonorList(query);
+                txtId.setText("");
+                txtDname.setText("");
+                txtBgroup.setText("");
                 JOptionPane.showMessageDialog(null, "Donor deleted");
                 
             } catch (SQLException ex) {
@@ -393,10 +403,10 @@ public class UpdateDonor extends javax.swing.JFrame {
     private void tableDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDonorMouseClicked
         int index = tableDonor.getSelectedRow();
         
-        String id = getDonorList().get(index).getDonorId().substring(3,6);
+        String id = getDonorList(query).get(index).getDonorId().substring(3,6);
         txtId.setText(id);
-        txtDname.setText(getDonorList().get(index).getName());
-        txtBgroup.setText(getDonorList().get(index).getBloodGroup());
+        txtDname.setText(getDonorList(query).get(index).getName());
+        txtBgroup.setText(getDonorList(query).get(index).getBloodGroup());
         
     }//GEN-LAST:event_tableDonorMouseClicked
 
@@ -404,32 +414,39 @@ public class UpdateDonor extends javax.swing.JFrame {
 
         int index = tableDonor.getRowCount();
         
-        for(int i = 0; i < index; i++) {
         if(txtDname.getText().equals("") && txtBgroup.getText().equals("")) {
-            String x = getDonorList().get(i).getDonorId();
+            for(int i = 0; i < index; i++) {
+            String x = getDonorList(query).get(i).getDonorId();
             if(txtId.getText().equals(x)) {
                     String query2 = txtId.getText();
                     searchDonor(query2);
                 }
+            }
         }
-        else if(txtId.getText().equals("") && txtBgroup.getText().equals("")) {
-            String y = getDonorList().get(i).getName();
+        /*else if(txtId.getText().equals("") && txtBgroup.getText().equals("")) {
+            for(int i = 0; i < index; i++) {
+            String y = getDonorList(query).get(i).getName();
             if(txtDname.getText().equals(y)) {
-                    String query = txtDname.getText();
-                    searchDonor(query);
-                }
-        }
-        else if(txtId.getText().equals("") && txtDname.getText().equals("")) {
-            String z = getDonorList().get(i).getBloodGroup();
-            if(txtBgroup.getText().equals(z)) {
-                    String query1 = txtBgroup.getText();
+                    String query1 = txtDname.getText();
                     searchDonor(query1);
                 }
-        }
-        else {
-            
-        }
-        }
+            }
+        }*/
+       /* else if(txtId.getText().equals("") && txtDname.getText().equals("")) {
+            for(int i = 0; i < index; i++) {
+                String[] z = new String[index];
+                z[i] = getDonorList().get(i).getBloodGroup();
+            if(txtBgroup.getText().equals(z[i])) {
+                    String[] query = new String[index];
+                    query[i] = txtBgroup.getText();
+                    searchDonor(query[i]);
+                }
+            }
+        }*/
+        //String id = txtId.getText();
+        /*query = "SELECT * FROM donor ORDER BY bloodGroup ASC";
+        showDonorList(query);*/
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtIdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyReleased

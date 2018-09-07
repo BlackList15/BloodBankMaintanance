@@ -32,6 +32,7 @@ public class UpdateHospital extends javax.swing.JFrame {
     public UpdateHospital() {
         initComponents();
         showHospitalList();
+        tableHospital.setAutoCreateRowSorter(true);
     }
 
      public ArrayList<Hospital> getHospitalList() {
@@ -215,9 +216,7 @@ public class UpdateHospital extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addGap(133, 133, 133)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(79, 79, 79))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -227,7 +226,8 @@ public class UpdateHospital extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(167, 167, 167))))
         );
 
@@ -303,7 +303,7 @@ public class UpdateHospital extends javax.swing.JFrame {
         else {
             AddHospital addHospital = new AddHospital();
             addHospital.setVisible(true);
-            addHospital.btnUpdate.setEnabled(false);
+            addHospital.updateButton.setEnabled(false);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -315,10 +315,12 @@ public class UpdateHospital extends javax.swing.JFrame {
             try {
                 PreparedStatement pst = conn.prepareStatement(selectQuery);
                 String hospitalId = txtHospitalId.getText();
-                int id1 = Integer.parseInt(hospitalId.substring(1,4));
+                int id1 = Integer.parseInt(hospitalId);
                 pst.setInt(1, id1);
                 pst.executeUpdate();
                 showHospitalList();
+                txtHospitalId.setText("");
+                txtHospitalName.setText("");
                 JOptionPane.showMessageDialog(null, "Hospital deleted");
                 
             } catch (SQLException ex) {
@@ -343,20 +345,20 @@ public class UpdateHospital extends javax.swing.JFrame {
                     searchHospital(query2);
                 }
         }
-        else if(txtHospitalId.getText().equals("")) {
+        /*else if(txtHospitalId.getText().equals("")) {
             String y = getHospitalList().get(i).getHosName();
             if(txtHospitalName.getText().equals(y)) {
                     String query = txtHospitalName.getText();
                     searchHospital(query);
                 }
-        }
+        }*/
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHospitalMouseClicked
         int index = tableHospital.getSelectedRow();
         
-        txtHospitalId.setText(getHospitalList().get(index).getHospitalId());
+        txtHospitalId.setText(getHospitalList().get(index).getHospitalId().substring(1,4));
         txtHospitalName.setText(getHospitalList().get(index).getHosName());
     }//GEN-LAST:event_tableHospitalMouseClicked
 

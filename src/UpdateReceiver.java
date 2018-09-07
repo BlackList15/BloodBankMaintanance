@@ -32,6 +32,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
     public UpdateReceiver() {
         initComponents();
         showReceiverList();
+        tableReceiver.setAutoCreateRowSorter(true);
     }
     
      public ArrayList<Receiver> getReceiverList() {
@@ -143,7 +144,6 @@ public class UpdateReceiver extends javax.swing.JFrame {
         txtReceiverBloodGroup = new javax.swing.JTextField();
         txtReceiverName = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableReceiver = new javax.swing.JTable();
@@ -187,15 +187,6 @@ public class UpdateReceiver extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -216,9 +207,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
                             .addComponent(txtReceiverBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtReceiverName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(126, 126, 126))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -226,21 +215,18 @@ public class UpdateReceiver extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(102, 102, 102)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtReceiverName, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(47, 47, 47)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtReceiverBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtReceiverBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(175, Short.MAX_VALUE))
         );
 
@@ -265,17 +251,17 @@ public class UpdateReceiver extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 887, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addGap(38, 38, 38))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,6 +289,13 @@ public class UpdateReceiver extends javax.swing.JFrame {
     private void txtReceiverNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReceiverNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtReceiverNameActionPerformed
+    
+    private void tableReceiverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableReceiverMouseClicked
+         int index = tableReceiver.getSelectedRow();
+        
+        txtReceiverName.setText(getReceiverList().get(index).getPatientNm());
+        txtReceiverBloodGroup.setText(getReceiverList().get(index).getBlGroup());
+    }//GEN-LAST:event_tableReceiverMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int index = tableReceiver.getSelectedRow();
@@ -311,38 +304,15 @@ public class UpdateReceiver extends javax.swing.JFrame {
                 showReceiver(index);
             } catch (ParseException ex) {
                 Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
         }
         else {
             AddReceiver addReceiver = new AddReceiver();
             addReceiver.setVisible(true);
             addReceiver.btnUpdate.setEnabled(false);
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        int index = tableReceiver.getRowCount();
-
-        for(int i = 0; i < index; i++) {
-            if(txtReceiverName.getText().equals("")) {
-                String x = getReceiverList().get(i).getBlGroup();
-                if(txtReceiverBloodGroup.getText().equals(x)) {
-                    String query2 = txtReceiverBloodGroup.getText();
-                    searchReceiver(query2);
-                }
-            else {
-
-            }
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-    }
-    private void tableReceiverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableReceiverMouseClicked
-         int index = tableReceiver.getSelectedRow();
-        
-        txtReceiverName.setText(getReceiverList().get(index).getPatientNm());
-        txtReceiverBloodGroup.setText(getReceiverList().get(index).getBlGroup());
-    }//GEN-LAST:event_tableReceiverMouseClicked
     
     /**
      * @param args the command line arguments
@@ -380,7 +350,6 @@ public class UpdateReceiver extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -76,12 +76,11 @@ public class AddHospital extends javax.swing.JFrame {
         txtHospital = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtDocContact = new javax.swing.JTextField();
-        btnUpdate = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
-        setPreferredSize(new java.awt.Dimension(1928, 1081));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -179,10 +178,10 @@ public class AddHospital extends javax.swing.JFrame {
 
         txtDocContact.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                updateButtonActionPerformed(evt);
             }
         });
 
@@ -222,7 +221,7 @@ public class AddHospital extends javax.swing.JFrame {
                 .addGap(159, 159, 159))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(389, 389, 389)
-                .addComponent(btnUpdate)
+                .addComponent(updateButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -259,7 +258,7 @@ public class AddHospital extends javax.swing.JFrame {
                     .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(btnUpdate)
+                .addComponent(updateButton)
                 .addContainerGap())
         );
 
@@ -342,7 +341,7 @@ public class AddHospital extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHospitalActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         try {
             DbConnection db = new DbConnection();
             Connection cn = db.ConnectDb();
@@ -360,7 +359,6 @@ public class AddHospital extends javax.swing.JFrame {
             int docCon = Integer.parseInt(txtDocContact.getText());
             
             String hosid = uh.txtHospitalId.getText();
-            int i = Integer.parseInt(hosid.substring(1,4));
            
             
             String updateSQL = "update Hospital set hosName=?,hosContact=?,address=?, disFromHere=?, cheifDocName=?, cheifDocCon=? where id=?";
@@ -373,7 +371,7 @@ public class AddHospital extends javax.swing.JFrame {
                         preparedStatement.setFloat(4,dis);
                         preparedStatement.setString(5,doc);
                         preparedStatement.setInt(6,docCon);
-                        preparedStatement.setInt(7,i);
+                        preparedStatement.setString(7,hosid);
 			preparedStatement.executeUpdate();
                         
                         JOptionPane.showMessageDialog(null, "Successfully Updated Hospital data");
@@ -382,7 +380,7 @@ public class AddHospital extends javax.swing.JFrame {
         } catch (SQLException ex) {
            System.out.println(ex.getMessage());
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,7 +420,6 @@ public class AddHospital extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnReset;
     public javax.swing.JButton btnSave;
-    public javax.swing.JButton btnUpdate;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -440,5 +437,6 @@ public class AddHospital extends javax.swing.JFrame {
     public javax.swing.JTextField txtDocContact;
     public javax.swing.JTextField txtDoctor;
     public javax.swing.JTextField txtHospital;
+    public javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -347,7 +347,7 @@ public class AddDonor extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonResetActionPerformed
 
     private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_buttonExitActionPerformed
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
@@ -357,8 +357,9 @@ public class AddDonor extends javax.swing.JFrame {
             conn = DbConnection.ConnectDb();
             
             try {
-                pst = conn.prepareStatement("INSERT into donor(name,email,address,contact,gender,dateOfBirth,bloodGroup)"
-                        + "values(?,?,?,?,?,?,?)");
+                String insertQuery = "INSERT into donor(name,email,address,contact,gender,dateOfBirth,bloodGroup)"
+                        + "values(?,?,?,?,?,?,?)";
+                pst = conn.prepareStatement(insertQuery);
                 pst.setString(1, txtDonor.getText());
                 pst.setString(2, txtEmail.getText());
                 pst.setString(3, txtAddress.getText());
@@ -373,7 +374,7 @@ public class AddDonor extends javax.swing.JFrame {
                 pst.setString(7, value);
                 
                 pst.executeUpdate();
-                updateDonor.showDonorList();
+                updateDonor.showDonorList(updateDonor.query);
                 JOptionPane.showMessageDialog(null, "Data Inserted");
                 
             } catch (SQLException ex) {
@@ -451,8 +452,7 @@ public class AddDonor extends javax.swing.JFrame {
                 pst.setString(8, id);
                 
                 pst.executeUpdate();
-                
-                updateDonor.showDonorList();
+                updateDonor.showDonorList(updateDonor.query);
                 JOptionPane.showMessageDialog(null, "Data Updated");
                 
             } catch (SQLException ex) {

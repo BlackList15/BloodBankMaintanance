@@ -83,7 +83,7 @@ public class AddReceiver extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtPatient = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        selectHospital = new javax.swing.JComboBox<>();
+        selectHospital = new javax.swing.JComboBox<String>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtChiefDoctor = new javax.swing.JTextField();
