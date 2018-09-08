@@ -12,7 +12,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -393,7 +396,8 @@ public class AddReceiver extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-    
+        UpdateReceiver updateReceiver = new UpdateReceiver();
+
         if(checkInputReceiver()) {
             conn = DbConnection.ConnectDb();
             
@@ -421,10 +425,24 @@ public class AddReceiver extends javax.swing.JFrame {
                 String transactionDate = dateFormat.format(txtTransactionDate.getDate());
                 pst.setString(9, transactionDate);
                 
-               
-                
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Data Inserted");
+                updateReceiver.showReceiverList();
+                JOptionPane.showMessageDialog(null, "Receiver Data Inserted");
+                
+                String selectQuery = "DELETE FROM bloodbag WHERE Bno =?";
+            
+                PreparedStatement ps = conn.prepareStatement(selectQuery);
+                int id1 = Integer.parseInt(bloodbag.substring(2,5));
+                ps.setInt(1, id1);
+                ps.executeUpdate();
+                try {
+                    BloodStocks bloodStocks = new BloodStocks();
+                    bloodStocks.showBloodExpirationdateList();
+                    bloodStocks.showBloodList();
+                } catch (ParseException ex) {
+                    Logger.getLogger(AddReceiver.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JOptionPane.showMessageDialog(null, "BloodBag Record deleted");
                 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
