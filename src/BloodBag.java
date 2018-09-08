@@ -168,7 +168,7 @@ public boolean checkInput() {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Donation Date");
 
-        txtDonationDate.setDateFormatString("yyyy,mm,dd");
+        txtDonationDate.setDateFormatString("yyyy-MMM-dd");
         txtDonationDate.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
@@ -321,7 +321,7 @@ public boolean checkInput() {
                 
                 pst.setString(5, txtBloodVolume.getText());
                 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd");
                 String donationDate = dateFormat.format(txtDonationDate.getDate());
                 pst.setString(6, donationDate);
                 

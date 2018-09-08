@@ -201,7 +201,7 @@ public class AddDonor extends javax.swing.JFrame {
             }
         });
 
-        txtDateOfBirth.setDateFormatString("yyyy,mm,dd");
+        txtDateOfBirth.setDateFormatString("yyyy,MMM,dd");
         txtDateOfBirth.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         buttonUpdate.setBackground(new java.awt.Color(0, 0, 102));
@@ -366,7 +366,7 @@ public class AddDonor extends javax.swing.JFrame {
                 pst.setString(4, txtContact.getText());
                 pst.setString(5, gender);
                 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd");
                 String addDate = dateFormat.format(txtDateOfBirth.getDate());
                 pst.setString(6, addDate);
                 
@@ -441,7 +441,7 @@ public class AddDonor extends javax.swing.JFrame {
                 pst.setInt(4, Integer.parseInt(txtContact.getText()));
                 pst.setString(5, gender);
                 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd");
                 String addDate = dateFormat.format(txtDateOfBirth.getDate());
                 pst.setString(6, addDate);
                 

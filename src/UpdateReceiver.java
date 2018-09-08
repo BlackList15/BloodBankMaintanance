@@ -120,7 +120,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
         ar.txtDonorId.setText(getReceiverList().get(index).getDonId());
         ar.txtDonorName.setText(getReceiverList().get(index).getDonName());
        
-        Date trDate = new SimpleDateFormat("yyyy-mm-dd").parse((String)getReceiverList().get(index).getTrDate());
+        Date trDate = new SimpleDateFormat("yyyy-MMM-dd").parse((String)getReceiverList().get(index).getTrDate());
         ar.txtTransactionDate.setDate(trDate);
         
         
@@ -180,7 +180,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
-        jButton3.setText("Add/Update");
+        jButton3.setText("Add/View");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -309,7 +309,6 @@ public class UpdateReceiver extends javax.swing.JFrame {
         else {
             AddReceiver addReceiver = new AddReceiver();
             addReceiver.setVisible(true);
-            addReceiver.btnUpdate.setEnabled(false);
             
         }
     }//GEN-LAST:event_jButton3ActionPerformed

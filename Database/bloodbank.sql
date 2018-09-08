@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2018 at 10:45 AM
+-- Generation Time: Sep 08, 2018 at 06:01 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -35,7 +35,7 @@ CREATE TABLE `bloodbag` (
   `DId` varchar(6) NOT NULL,
   `Dname` varchar(25) NOT NULL,
   `Bvolume` int(11) NOT NULL,
-  `Ddate` date NOT NULL
+  `Ddate` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -43,8 +43,9 @@ CREATE TABLE `bloodbag` (
 --
 
 INSERT INTO `bloodbag` (`bId`, `Bno`, `Bgroup`, `DId`, `Dname`, `Bvolume`, `Ddate`) VALUES
-('BB', 001, 'O-', 'DON002', 'Vijay', 300, '2018-07-04'),
-('BB', 002, 'B+', 'DON007', 'dhanush', 300, '2018-09-02');
+('BB', 001, 'A+', 'DON008', 'kumar', 300, '2018-Sep-04'),
+('BB', 003, 'B+', 'DON005', 'Karshan', 300, '2018-Sep-05'),
+('BB', 007, 'A+', 'DON008', 'kumar', 300, '2018-Sep-05');
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,7 @@ CREATE TABLE `donor` (
   `address` varchar(40) NOT NULL,
   `contact` int(10) NOT NULL,
   `gender` varchar(6) NOT NULL,
-  `dateOfBirth` date NOT NULL,
+  `dateOfBirth` varchar(15) NOT NULL,
   `bloodGroup` char(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -69,9 +70,9 @@ CREATE TABLE `donor` (
 --
 
 INSERT INTO `donor` (`dId`, `id`, `name`, `email`, `address`, `contact`, `gender`, `dateOfBirth`, `bloodGroup`) VALUES
-('DON', 005, 'Karshan', 'karshan96@gmail.com', 'Wattala', 775846932, 'male', '1996-03-01', 'B+'),
-('DON', 006, 'vijay', 'vj@gmail.com', 'galle', 758469521, 'male', '2008-06-24', 'AB+'),
-('DON', 007, 'dhanush', 'dhanush123@gmail.com', 'jaffna', 789564123, 'male', '2001-04-17', 'B+');
+('DON', 005, 'Karshan', 'karshan96@gmail.com', 'Wattala', 775846932, 'male', '1996-Mar-01', 'B+'),
+('DON', 006, 'vijay', 'vj@gmail.com', 'galle', 758469521, 'male', '2008-Jun-24', 'AB+'),
+('DON', 008, 'kumar', 'kumar45@gmail.com', 'mannar', 778496321, 'male', '1987-May-05', 'A+');
 
 -- --------------------------------------------------------
 
@@ -95,8 +96,8 @@ CREATE TABLE `hospital` (
 --
 
 INSERT INTO `hospital` (`hId`, `id`, `hosName`, `hosContact`, `address`, `disFromHere`, `cheifDocName`, `cheifDocCon`) VALUES
-('H', 001, 'Hemas', 1158469521, 'Wattala', 15.2, 'K.J.Perera', 777569532),
-('H', 002, 'Nawaloka', 115689742, 'Colombo', 54.3, 'D.Silva', 758964213);
+('H', 002, 'Nawaloka', 115689742, 'Colombo', 54.3, 'D.Silva', 758964213),
+('H', 004, 'Hemas', 115469321, 'Wattala', 21.2, 'J.K.Bandara', 785469325);
 
 -- --------------------------------------------------------
 
@@ -131,7 +132,7 @@ CREATE TABLE `receiver` (
   `donorId` varchar(6) NOT NULL,
   `donorName` varchar(20) NOT NULL,
   `bagNo` varchar(5) NOT NULL,
-  `transactionDate` date NOT NULL
+  `transactionDate` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -139,7 +140,7 @@ CREATE TABLE `receiver` (
 --
 
 INSERT INTO `receiver` (`patientName`, `hospital`, `hospitalAddress`, `chiefDoctor`, `bloodGroup`, `donorId`, `donorName`, `bagNo`, `transactionDate`) VALUES
-('kumar', 'Hemas', 'Wattala', 'K.J.Perera', 'O-', 'DON002', 'Vijay', 'BB001', '2018-09-04');
+('Ravi', 'Hemas', 'Wattala', 'J.K.Bandara', 'A+', 'DON008', 'kumar', 'BB001', '2018-Sep-08');
 
 --
 -- Indexes for dumped tables
@@ -177,13 +178,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id` int(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `hospital`
 --
 ALTER TABLE `hospital`
-  MODIFY `id` int(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

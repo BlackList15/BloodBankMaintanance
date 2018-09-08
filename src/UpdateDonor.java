@@ -112,7 +112,7 @@ public class UpdateDonor extends javax.swing.JFrame {
                 else {
                     ad.female.setSelected(true);
                 }
-        Date addDate = new SimpleDateFormat("yyyy-mm-dd").parse((String)getDonorList(query).get(index).getDateOfBirth());
+        Date addDate = new SimpleDateFormat("yyyy-MMM-dd").parse((String)getDonorList(query).get(index).getDateOfBirth());
         ad.txtDateOfBirth.setDate(addDate);
         
         for(int i=0; i < ad.selectBlood.getItemCount(); i++) {

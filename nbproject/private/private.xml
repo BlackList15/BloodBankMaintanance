@@ -5,12 +5,17 @@
         <group>
             <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/MainMenu.java</file>
             <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/Donor.java</file>
-            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/DbConnection.java</file>
-            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/UpdateDonor.java</file>
-            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/BloodBag.java</file>
             <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/AddDonor.java</file>
             <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/AddHospital.java</file>
             <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/AddReceiver.java</file>
+            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/Receiver.java</file>
+            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/UpdateReceiver.java</file>
+            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/DbConnection.java</file>
+            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/UpdateDonor.java</file>
+            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/UpdateHospital.java</file>
+            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/BloodStocks.java</file>
+            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/BloodBag.java</file>
+            <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/Blood.java</file>
             <file>file:/C:/Users/karshan/Desktop/BlackList15-%20BloodBankMaintanance/src/Login.java</file>
         </group>
     </open-files>
