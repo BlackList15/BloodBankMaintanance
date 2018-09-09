@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import net.proteanit.sql.DbUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -332,24 +333,47 @@ public class UpdateHospital extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-          int index = tableHospital.getRowCount();
+        /*int index = tableHospital.getRowCount();
         
-        for(int i = 0; i < index; i++) {
         if(txtHospitalName.getText().equals("")) {
+            for(int i = 0; i < index; i++) {
             String x = getHospitalList().get(i).getHospitalId();
             if(txtHospitalId.getText().equals(x)) {
                     String query2 = txtHospitalId.getText();
                     searchHospital(query2);
                 }
+            }
         }
-        /*else if(txtHospitalId.getText().equals("")) {
+        else if(txtHospitalId.getText().equals("")) {
             String y = getHospitalList().get(i).getHosName();
             if(txtHospitalName.getText().equals(y)) {
                     String query = txtHospitalName.getText();
                     searchHospital(query);
                 }
         }*/
+        if(txtHospitalName.getText().equals("")) {
+            String id = txtHospitalId.getText().substring(1,4);
+            String searchQuery = "SELECT * FROM hospital WHERE id ='"+id+"'";
+            try {
+                PreparedStatement pst = conn.prepareStatement(searchQuery);
+                ResultSet rs = pst.executeQuery();
+                tableHospital.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else if(txtHospitalId.getText().equals("")) {
+            String name = txtHospitalName.getText();
+            String searchQuery = "SELECT * FROM hospital WHERE hosName ='"+name+"'";
+            try {
+                PreparedStatement pst = conn.prepareStatement(searchQuery);
+                ResultSet rs = pst.executeQuery();
+                tableHospital.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHospitalMouseClicked

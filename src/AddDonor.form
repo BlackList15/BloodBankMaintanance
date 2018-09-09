@@ -452,7 +452,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="txtDateOfBirth">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="yyyy,MMM,dd"/>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MMM-dd"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="20" style="1"/>
             </Property>

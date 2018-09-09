@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import net.proteanit.sql.DbUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -412,7 +413,7 @@ public class UpdateDonor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        int index = tableDonor.getRowCount();
+        /*int index = tableDonor.getRowCount();
         
         if(txtDname.getText().equals("") && txtBgroup.getText().equals("")) {
             for(int i = 0; i < index; i++) {
@@ -422,7 +423,7 @@ public class UpdateDonor extends javax.swing.JFrame {
                     searchDonor(query2);
                 }
             }
-        }
+        }*/
         /*else if(txtId.getText().equals("") && txtBgroup.getText().equals("")) {
             for(int i = 0; i < index; i++) {
             String y = getDonorList(query).get(i).getName();
@@ -432,17 +433,39 @@ public class UpdateDonor extends javax.swing.JFrame {
                 }
             }
         }*/
-       /* else if(txtId.getText().equals("") && txtDname.getText().equals("")) {
-            for(int i = 0; i < index; i++) {
-                String[] z = new String[index];
-                z[i] = getDonorList().get(i).getBloodGroup();
-            if(txtBgroup.getText().equals(z[i])) {
-                    String[] query = new String[index];
-                    query[i] = txtBgroup.getText();
-                    searchDonor(query[i]);
-                }
+        if(txtDname.getText().equals("") && txtBgroup.getText().equals("")) {
+            String id = txtId.getText().substring(3,6);
+            String searchQuery = "SELECT * FROM donor WHERE id ='"+id+"'";
+            try {
+                PreparedStatement pst = conn.prepareStatement(searchQuery);
+                ResultSet rs = pst.executeQuery();
+                tableDonor.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }*/
+        }
+        else if(txtId.getText().equals("") && txtBgroup.getText().equals("")) {
+            String name = txtDname.getText();
+            String searchQuery = "SELECT * FROM donor WHERE name ='"+name+"'";
+            try {
+                PreparedStatement pst = conn.prepareStatement(searchQuery);
+                ResultSet rs = pst.executeQuery();
+                tableDonor.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if(txtId.getText().equals("") && txtDname.getText().equals("")) {
+            String blood = txtBgroup.getText();
+            String searchQuery = "SELECT * FROM donor WHERE bloodGroup ='"+blood+"'";
+            try {
+                PreparedStatement pst = conn.prepareStatement(searchQuery);
+                ResultSet rs = pst.executeQuery();
+                tableDonor.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         //String id = txtId.getText();
         /*query = "SELECT * FROM donor ORDER BY bloodGroup ASC";
         showDonorList(query);*/

@@ -201,7 +201,7 @@ public class AddDonor extends javax.swing.JFrame {
             }
         });
 
-        txtDateOfBirth.setDateFormatString("yyyy,MMM,dd");
+        txtDateOfBirth.setDateFormatString("yyyy-MMM-dd");
         txtDateOfBirth.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
         buttonUpdate.setBackground(new java.awt.Color(0, 0, 102));
