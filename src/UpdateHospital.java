@@ -90,7 +90,7 @@ public class UpdateHospital extends javax.swing.JFrame {
         trs.setRowFilter(RowFilter.regexFilter(query));
     }
     
-     public void showHospital(int index) throws ParseException {
+     public void showHospitalList(int index) throws ParseException {
         AddHospital ah = new AddHospital();
         
         ah.txtHospital.setText(getHospitalList().get(index).getHosName());
@@ -99,7 +99,7 @@ public class UpdateHospital extends javax.swing.JFrame {
         ah.txtDistance.setText(Float.toString(getHospitalList().get(index).getDisFromHere()));
         ah.txtDoctor.setText(getHospitalList().get(index).getCheifDocName());
         ah.txtDocContact.setText(Integer.toString(getHospitalList().get(index).getCheifDocCon()));
-        
+        ah.txtHospitalId.setText(getHospitalList().get(index).getHospitalId().substring(1,4));
         
         
        
@@ -293,7 +293,7 @@ public class UpdateHospital extends javax.swing.JFrame {
         int index = tableHospital.getSelectedRow();
         if(tableHospital.isRowSelected(index)) {
             try {
-                showHospital(index);
+                showHospitalList(index);
             } catch (ParseException ex) {
                 Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
         }

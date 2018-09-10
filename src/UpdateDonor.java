@@ -109,9 +109,13 @@ public class UpdateDonor extends javax.swing.JFrame {
         
         if(getDonorList(query).get(index).getGender().equals("male")) {
                     ad.male.setSelected(true);
+                    ad.female.setSelected(false);
+                    ad.gender = "male";
                 }
                 else {
                     ad.female.setSelected(true);
+                    ad.male.setSelected(false);
+                    ad.gender = "female";
                 }
         Date addDate = new SimpleDateFormat("yyyy-MMM-dd").parse((String)getDonorList(query).get(index).getDateOfBirth());
         ad.txtDateOfBirth.setDate(addDate);
@@ -122,6 +126,7 @@ public class UpdateDonor extends javax.swing.JFrame {
                 ad.selectBlood.setSelectedIndex(i);
                     }
         }
+        ad.txtDonorId.setText(getDonorList(query).get(index).getDonorId().substring(3,6));
         ad.setVisible(true);
         ad.buttonSave.setEnabled(false);
         ad.buttonReset.setEnabled(false);
