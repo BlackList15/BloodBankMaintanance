@@ -129,17 +129,19 @@ public class UpdateHospital extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableHospital = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1928, 1081));
 
         jPanel1.setBackground(new java.awt.Color(51, 0, 102));
 
+        txtHospitalName.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         txtHospitalName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHospitalNameActionPerformed(evt);
             }
         });
 
+        txtHospitalId.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         txtHospitalId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHospitalIdActionPerformed(evt);
@@ -234,6 +236,7 @@ public class UpdateHospital extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 255));
 
+        tableHospital.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         tableHospital.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -292,6 +295,7 @@ public class UpdateHospital extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int index = tableHospital.getSelectedRow();
         if(tableHospital.isRowSelected(index)) {
+            this.dispose();
             try {
                 showHospitalList(index);
             } catch (ParseException ex) {
@@ -299,6 +303,7 @@ public class UpdateHospital extends javax.swing.JFrame {
         }
         }
         else {
+            this.dispose();
             AddHospital addHospital = new AddHospital();
             addHospital.setVisible(true);
             addHospital.updateButton.setEnabled(false);

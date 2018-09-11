@@ -362,12 +362,14 @@ public class UpdateDonor extends javax.swing.JFrame {
         int index = tableDonor.getSelectedRow();
         if(tableDonor.isRowSelected(index)) {
             try {
+                this.dispose();
                 showDonor(index);
             } catch (ParseException ex) {
                 Logger.getLogger(UpdateDonor.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         else {
+            this.dispose();
             AddDonor addDonor = new AddDonor();
             addDonor.setVisible(true);
             addDonor.buttonUpdate.setEnabled(false);

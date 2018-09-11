@@ -149,7 +149,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableReceiver = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1928, 1081));
 
         jPanel2.setBackground(new java.awt.Color(51, 0, 102));
@@ -246,6 +246,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
 
+        tableReceiver.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         tableReceiver.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -314,6 +315,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int index = tableReceiver.getSelectedRow();
         if(!tableReceiver.isRowSelected(index)) {
+            this.dispose();
             AddReceiver addReceiver = new AddReceiver();
             addReceiver.setVisible(true);
             
@@ -324,6 +326,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         int index = tableReceiver.getSelectedRow();
         if(tableReceiver.isRowSelected(index)) {
+            this.dispose();
             try {
                 showReceiver(index);
             } catch (ParseException ex) {
