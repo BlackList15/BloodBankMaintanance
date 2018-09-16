@@ -246,6 +246,7 @@ public class UpdateHospital extends javax.swing.JFrame {
                 "Hospital Id", "Hospital Name", "Hospital Contact", "Address", "Distance", "Chief Doctor", "Chief Doctor Contact"
             }
         ));
+        tableHospital.setRowHeight(25);
         tableHospital.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableHospitalMouseClicked(evt);

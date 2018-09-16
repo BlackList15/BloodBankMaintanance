@@ -245,7 +245,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(936, 637));
 
-        tableReceiver.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
+        tableReceiver.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
         tableReceiver.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -254,6 +254,7 @@ public class UpdateReceiver extends javax.swing.JFrame {
                 "Patient Name", "Hospital", "Hospital Address", "Chief Doctor", "Blood Group", "Donor Id", "Donor Name", "Bag No", "Transaction Date"
             }
         ));
+        tableReceiver.setRowHeight(25);
         tableReceiver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableReceiverMouseClicked(evt);
